@@ -1,2 +1,33 @@
 <!--pages/category/category.wxml-->
-<text>pages/category/category.wxml</text>
+<view class="row">
+    <view class="col-4">限时特价</view>
+    <view class="col-4">发现好物</view>
+    <view class="col-4">新品上架</view>
+</view>
+<view class="category-wrap">
+    <view class="category-name"><view class="name-tag"></view><view class="">都匀毛尖</view></view>
+    <view class="category-items row">
+        <view class="category-item col-3">
+            <view class="item-img"><image class="full-w" src="/asset/img/home_icon_tea.png" mode="widthFix" /></view>
+            <view class="name text-overflow">红敏茶园</view>
+        </view>
+        <view class="category-item col-3">
+            <view class="item-img"><image class="full-w" src="/asset/img/home_icon_tea.png" mode="widthFix" /></view>
+            <view class="name text-overflow">红敏茶园</view>
+        </view>
+        <view class="category-item col-3">
+            <view class="item-img"><image class="full-w" src="/asset/img/home_icon_tea.png" mode="widthFix" /></view>
+            <view class="name text-overflow">红敏茶园</view>
+        </view>
+        <view class="category-item col-3">
+            <view class="item-img"><image class="full-w" src="/asset/img/home_icon_tea.png" mode="widthFix" /></view>
+            <view class="name text-overflow">红敏茶园</view>
+        </view>
+        <view class="category-item col-3">
+            <view class="item-img"><image class="full-w" src="/asset/img/home_icon_tea.png" mode="widthFix" /></view>
+            <view class="name text-overflow">红敏茶园</view>
+        </view>
+    </view>
+    <view class="category-name"><view class="name-tag"></view><view class="">都匀毛尖</view></view>
+</view>
+

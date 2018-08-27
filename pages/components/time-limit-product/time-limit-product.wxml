@@ -2,11 +2,11 @@
 <view class="time-limit-class product-box">
     <view class="product-item" wx:for="{{productData}}" wx:key>
         <view class="countdown">距结束 <text class="time-number">25</text>:<text class="time-number">25</text>:<text class="time-number">25</text></view>
-        <view class="product-img"><image class="full-img" src="/asset/img/product.png" mode="widthFix" /></view>
-        <view class="title">商品名称商品名称商品名称商品称商品名称商品名称</view>
+        <view class="product-img"><image class="full-img" src="{{item.imgPath}}" mode="widthFix" /></view>
+        <view class="title">{{item.title}}</view>
         <view class="price-wrap">
-            <view class="price">￥58.95</view>
-            <view class="old-price"><s>￥58.95</s></view>
+            <view class="price">￥{{item.price}}</view>
+            <view class="old-price">￥{{item.oldPrice}}</view>
         </view>
     </view>
 </view>
