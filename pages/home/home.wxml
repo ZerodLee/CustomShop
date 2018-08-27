@@ -1,0 +1,31 @@
+<!--pages/home/home.wxml-->
+<view class="page">
+    <view class="banner">
+        <swiper indicator-dots="true" autoplay="true" indicator-active-color="#fff" interval="{{interval}}" duration="{{duration}}">
+            <block wx:for="{{banner}}" wx:key>
+                <swiper-item>
+                    <image src="{{item}}" mode="widthFix" class="slide-image"/>
+                </swiper-item>
+            </block>
+        </swiper>
+        <view class="bottm-bar"></view>
+        <view class="search-bar">
+            <view class="logo"><image class="full-w full-h" src="/asset/img/logo.png" mode="widthFix" /></view>
+            <view class="search-min-line"></view>
+            <view class="search-icon"><image class="full-w full-h" src="/asset/img/home_icon_search.png" mode="widthFix" /></view>
+            <view class="search-box">输入商品名称搜索</view>
+        </view>
+    </view>
+    <view class="category-box row">
+        <view class="category-item col-3" data-id="{{item.id}}" bindtap="goCategory" wx:for="{{categories}}" wx:key>
+            <view class="category-icon"><image class="icon" src="{{item.iconPath}}" mode="widthFix" /></view>
+            <view class="category-text">{{item.text}}</view>
+        </view>
+    </view>
+    <view class="dispaly-box">
+        <view class="product-banner">
+            <image class="full-w" src="/asset/img/home_banner_time-limit.png" mode="widthFix" />
+        </view>
+        <time-limit-product time-limit-class="row" productData="{{timeLimitData}}" ></time-limit-product>
+    </view>
+</view>

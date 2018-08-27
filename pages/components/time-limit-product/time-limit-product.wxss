@@ -1,0 +1,57 @@
+/* pages/components/time-limit-product/time-limit-product.wxss */
+.product-box{
+    flex-wrap: wrap;
+    border-top: 1.6vw solid #f1f1f1;
+    background-color: #fff;
+}
+.product-item{
+    width: 49.2vw;
+    border-bottom: 1.6vw solid #f1f1f1;
+    padding: 5px 0;
+}
+.product-item:nth-of-type(odd){
+    border-right: 1.6vw solid #f1f1f1;
+}
+.countdown{
+    font-size: 16px;
+    padding: 5px 10px;
+}
+.time-number{
+    display: inline-block;
+    margin: 0 5px;
+    background-color: #333233;
+    color: #fff;
+    font-size: 14px;
+    padding: 2px;
+    border-radius: 3px;
+}
+.title{
+    font-size: 16px;
+    color: #333233;
+    padding: 2px 8px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.product-img,.full-img{
+    width: 100%;
+}
+.price-wrap{
+    display: flex;
+    align-items: flex-end;
+    padding: 2px 8px;
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.price{
+    color: #ef2827;
+    font-weight: 600;
+    margin-right: 20px;
+}
+.old-price{
+    font-size: 13px;
+    color: #999;
+    text-decoration:line-through;
+}

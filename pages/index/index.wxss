@@ -1,0 +1,194 @@
+/**index.wxss**/
+page{
+  font-size: 14px;
+  position: relative;
+  background-color: #f5f5f5;
+}
+page view{
+  box-sizing: border-box;
+}
+.head{
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+  /* height: 50px; */
+  top: 0;
+  left: 0;
+  background-color: #fff;
+}
+.head .header{
+  width: 100%;
+  height: 40px;
+  padding: 0 20px;
+  background-color: #00be3c;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header .item{
+  padding: 7px 20px;
+  transition: background 0.3s;
+}
+.header .item:active{
+  background: #069c36
+}
+.head .classes{
+  width: 100%;
+  height: 40px;
+  padding: 0 20px;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  align-items: center;
+}
+.classes>.class{
+  padding: 0 15px;
+  line-height: 40px;
+  height: 100%;
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+.classes>.class.active{
+  color: #00be3c;
+}
+.classes>.class:active{
+  background: #f1f1f1;
+}
+.head .categories{
+  border-top: 1px solid #ccc;
+  width: 100%;
+
+}
+.categories>view{
+  line-height: 32px;
+  font-size: 13px;
+  text-align: center;
+  transition: background 0.3s;
+}
+.categories .col-4:active{
+  background: #f1f1f1;
+}
+.categories .item.active{
+  color: #00be3c;
+  border-bottom: 2px solid #00be3c;
+}
+.content{
+  min-height: 90vh;
+  margin-top: 113px;
+  position: relative;
+  z-index: 1;
+}
+.content .zhangjie-title{
+  display: flex;
+  height: 50px;
+  padding: 7px 0;
+}
+.content .zhangjie-title>.title-box{
+  background-color: #00be3c;
+  color: #fff;
+  position: relative;
+  padding: 0 35px 0 30px;
+  line-height: 36px;
+  height: 36px;
+}
+.title-box:after{
+  position: absolute;
+  content: ' ';
+  display: block;
+  height: 0px;
+  width: 0px;
+  right: -0.5px;
+  top: 0;
+  border-top: 18px solid transparent;
+  border-right: 13px solid #f5f5f5;
+  border-bottom: 18px solid transparent;
+}
+.zhangjie .points{
+  margin-bottom: 7px;
+}
+.zhangjie .points-title{
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  width: 100%;
+  padding:10px 18px;
+  transition: background 0.3s;
+}
+.points-title .icon{
+  width: 50px;
+  height: 50px;
+  background: url('https://www.sunvke.com/Content/images/home_pic.png') center/100% no-repeat;
+}
+.points-title .title{
+  margin-left: 12px;
+}
+.points-title .name{
+  margin-bottom: 6px;
+}
+.points-title .desc{
+  font-size: 12px;
+  color: #888;
+}
+.points-title .open-icon{
+  margin-left: auto;
+  transition: transform 0.3s
+}
+.open-icon .open-img{
+  width: 10px;
+  height: 10px;
+  background: url('https://www.sunvke.com/Content/images/home_arrow_unfold.png') center/100% no-repeat;
+}
+.open-img.rotate{
+  transform:rotate(180deg);
+}
+.video-list{
+  overflow: hidden;
+  /* height: 0; */
+  transition: height 0.5s;
+}
+.video-list.show{
+  height: auto;
+}
+.video-list.hide{
+  height: 0;
+}
+.video-list .video{
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 15px;
+  transition: background 0.3s;
+}
+.video-list .video:active,.points-title:active{
+  background: #f1f1f1;
+}
+.video-list .video:last-child{
+  border: 0;
+}
+.video .play-icon{
+  width: 25px;
+  height: 25px;
+  background: url('https://www.sunvke.com/Content/images/home_video_btn_1.png') center/80% no-repeat;
+}
+.video .name{
+  font-size: 13px;
+  color: #888;
+  margin-left: 12px;
+  max-width: 50vw;
+}
+.video .tags{
+  margin-left: auto;
+  
+}
+.tags .tag{
+  display: inline-block;
+  margin-left: 7px;
+  padding: 2px 5px;
+  border-radius: 50px;
+  font-size: 12px;
+  border: 1px solid #00be3c;
+}

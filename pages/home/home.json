@@ -1,0 +1,5 @@
+{
+    "usingComponents": {
+        "time-limit-product": "/pages/components/time-limit-product/time-limit-product"
+    }
+}
