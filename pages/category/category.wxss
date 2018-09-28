@@ -31,6 +31,10 @@
 .category-item .item-img{
     width: 80%;
 }
+.item-img image{
+    border-radius: 50vw;
+    overflow: hidden;
+}
 .category-item .name{
     max-width: 100%;
 }

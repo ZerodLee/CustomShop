@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    allCheck:false
   },
 
   /**
@@ -13,6 +13,12 @@ Page({
    */
   onLoad: function (options) {
   
+  },
+  checkboxChange(e){
+    console.log(e)
+    this.setData({
+      allCheck:!this.data.allCheck
+    })
   },
 
   /**

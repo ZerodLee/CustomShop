@@ -1,0 +1,56 @@
+<!--pages/proDetail/proDetail.wxml-->
+<view class="page">
+    <view class="pro-img">
+        <swiper indicator-dots="true" autoplay="true" indicator-active-color="#fff" interval="{{interval}}" duration="{{duration}}">
+            <block wx:for="{{detail.photoinfo}}" wx:key>
+                <swiper-item class="img-fixed-width">
+                    <image src="{{item}}" mode="widthFix" class="slide-image"/>
+                </swiper-item>
+            </block>
+        </swiper>
+    </view>
+    <view class="pro-info">
+        <view class="pro-title text-overflow-2">{{detail.title}}</view>
+        <view class="price-text"><view class="price">￥{{detail.price}} </view><view class="old-price">￥{{detail.oprice}} </view></view>
+        <view class="pro-other">
+            <view>运费： ￥{{detail.freight}}</view>
+            <view>销量： {{detail.sales}}件</view>
+        </view>
+    </view>
+    <view class="pro-tags">
+        <view class="pro-tag"><icon class="tag-icon" type="success_no_circle" size="10" color="#f32f52"/>品质保证</view>
+        <view class="pro-tag"><icon class="tag-icon" type="success_no_circle" size="10" color="#f32f52"/>购物赠积分</view>
+        <view class="pro-tag"><icon class="tag-icon" type="success_no_circle" size="10" color="#f32f52"/>优质服务</view>
+    </view>
+    <view class="select-bar">
+        <view class="select-item">
+            <view class="select-title">选择 规格/分类</view>
+            <view class="arrow-icon"></view>
+        </view>
+    </view>
+    <view class="swiper-switch">
+        <view class="switch-btn"><view class="text">商品详情</view></view>
+        <view class="switch-btn"><view class="text">评价（2）</view></view>
+    </view>
+    <view class="pro-detail">
+        <swiper duration="300" bindchange="swiperChange" style="height: {{swiperHeight}}px;">
+            <swiper-item>
+                <rich-text class="detail-content" nodes="{{detail.contentmob}}"></rich-text>
+            </swiper-item>
+            <swiper-item>
+                <view class="issue"></view>
+                <!-- <image src="{{item}}" mode="widthFix" class="slide-image"/> -->
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="btns-bar">
+        <view class="left row">
+            <view class="left-btn collect-btn"><view class="">收藏</view></view>
+            <view class="left-btn cart-btn"><view class="">购物车</view></view>
+        </view>
+        <view class="right row">
+            <view class="right-btn addCart-btn">加入购物车</view>
+            <view class="right-btn buy-btn">立即购买</view>
+        </view>
+    </view>
+</view>

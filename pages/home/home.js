@@ -1,4 +1,11 @@
 // pages/home/home.js
+import { Http } from '../../utils/http'
+import { url } from '../../utils/static/urls'
+
+const util = require('../../utils/util.js')
+
+const app = getApp()
+const http = new Http()
 Page({
 
   /**
@@ -10,35 +17,163 @@ Page({
     interval: 4000,
     duration: 500,
     banner:[
-      '/asset/img/hone_banner.png',
-      '/asset/img/hone_banner.png',
-      '/asset/img/hone_banner.png'
+      // '/asset/img/hone_banner.png',
+      // '/asset/img/hone_banner.png',
+      // '/asset/img/hone_banner.png'
     ],
     categories:[
-      {iconPath:'/asset/img/home_icon_tea.png',text:'都匀毛尖',id:'1'},
-      {iconPath:'/asset/img/home_icon_stqn.png',text:'生态黔南',id:'2'},
-      {iconPath:'/asset/img/home_icon_food.png',text:'绿色黔南',id:'3'},
-      {iconPath:'/asset/img/home_icon_mzgy.png',text:'民族工艺',id:'4'},
-      {iconPath:'/asset/img/home_icon_life.png',text:'爱尚生活',id:'5'},
-      {iconPath:'/asset/img/home_icon_jz.png',text:'家居建材',id:'6'},
-      {iconPath:'/asset/img/home_icon_fp.png',text:'扶贫专区',id:'7'},
-      {iconPath:'/asset/img/home_icon_more.png',text:'更多',id:'0'},
+      // {photo:'/asset/img/home_icon_tea.png',title:'都匀毛尖',id:'1'},
+      // {photo:'/asset/img/home_icon_stqn.png',title:'生态黔南',id:'2'},
+      // {photo:'/asset/img/home_icon_food.png',title:'绿色黔南',id:'3'},
+      // {photo:'/asset/img/home_icon_mzgy.png',title:'民族工艺',id:'4'},
+      // {photo:'/asset/img/home_icon_life.png',title:'爱尚生活',id:'5'},
+      // {photo:'/asset/img/home_icon_jz.png',title:'家居建材',id:'6'},
+      // {photo:'/asset/img/home_icon_fp.png',title:'扶贫专区',id:'7'},
+      // {photo:'/asset/img/home_icon_more.png',title:'更多',id:'0'},
     ],
-    timeLimitData:[
-      {imgPath:'/asset/img/product.png',title:'商品一 独家制作 官方直销 优惠多多',price:'57.98',oldPrice:'60.00',countdown:'2018-08-27 18:29:00'},
-      {imgPath:'/asset/img/product.png',title:'商品二 配方一流 官方直销 优惠多多',price:'37.98',oldPrice:'40.00',countdown:'2018-08-29 16:20:00'},
-      {imgPath:'/asset/img/product.png',title:'商品三 绝味 官方直销 优惠多多',price:'45.98',oldPrice:'65.00',countdown:'2018-08-28 10:29:00'},
-      {imgPath:'/asset/img/product.png',title:'商品四 只有想不到 官方直销 优惠多多',price:'5.98',oldPrice:'30.00',countdown:'2018-08-30 18:29:00'},
-    ],
+    timeLimitData:[{
+      // discount:'1.0',
+      // endtime:'1541001307',
+      // title:'商品一 独家制作 官方直销 优惠多多',
+      // photo:'https://www.qntv3h.com/out/upload/2018/08/21/15348470380799i4rru.jpg',
+      // price:'57.98',
+      // sales:'895',
+      // thumb:'2018/08/21/thumbnail/15348470380799i4rru.jpg',
+      // oldPrice:'60.00',
+      // countdown:'2018-08-27 18:29:00'
+    }],
+    categoryBanner:{
+      recHot:'/asset/img/home_title_city-wide.png',
+      newPro:'/asset/img/home_title_new-product.png',
+      findPro:'/asset/img/home_title_discovery.png',
+      hotHouse:'/asset/img/home_title_house.png'
+    },
+    homeProList:{},
+    listAds:[],
+    lastAds:[],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    let that = this
+    util.showLoading()
+    http.getRequest(url.getBanner).then(res =>{
+      console.log('bannner',res)
+      if(res.data.returnCode == '200'){
+        that.setData({
+          banner:res.data.data2
+        })
+      }
+      return http.getRequest(url.getCategories)
+    }).then(res =>{
+      console.log('category',res)
+      if(res.data.returnCode == '200'){
+        that.setData({
+          categories:res.data.data2
+        })
+      }
+      return http.getRequest(url.proLimitTime)
+    }).then(res =>{
+      console.log('limitTime',res)
+      if(res.data.returnCode == '200'){
+        that.setData({
+          timeLimitData:res.data.data2
+        })
+      }
+      //开始加载所有首页商品
+      //新品上架
+      http.getRequest(url.newPro).then(res =>{
+        console.log('newPro',res)
+        if(res.data.returnCode == '200'){
+          that.setData({
+            'homeProList.newPro':res.data.data2
+          })
+        }
+      })
+      //发现好物
+      http.getRequest(url.findPro).then(res =>{
+        console.log('findPro',res)
+        if(res.data.returnCode == '200'){
+          that.setData({
+            'homeProList.findPro':res.data.data2
+          })
+        }
+      })
+      //同城馆
+      http.getRequest(url.recHot).then(res =>{
+        console.log('recHot',res)
+        if(res.data.returnCode == '200'){
+          that.setData({
+            'homeProList.recHot':res.data.data2
+          })
+        }
+      })
+      //热销房源
+      http.getRequest(url.hotHouse).then(res =>{
+        console.log('hotHouse',res)
+        if(res.data.returnCode == '200'){
+          that.setData({
+            'homeProList.hotHouse':res.data.data2
+          })
+        }
+      })
+      //促销、同城、新品上架 banner
+      http.getRequest(url.getCarouselAdvertise).then(res =>{
+        console.log('getCarouselAdvertise',res)
+        if(res.data.returnCode == '200'){
+          that.setData({
+            listAds:res.data.data2
+          })
+        }
+      })
+      //最下的三张图片
+      http.getRequest(url.getFindAdvertise).then(res =>{
+        console.log('getFindAdvertise',res)
+        if(res.data.returnCode == '200'){
+          that.setData({
+            lastAds:res.data.data2
+          })
+        }
+      })
+    }).catch(res =>{
+      console.log(res)
+      util.openAlert(res)
+    }).finally(() => {
+      util.hideLoading()
+    })
   },
 
+  goDetail(e){
+    console.log(e.currentTarget.dataset.id)
+    wx.navigateTo({
+      url: '../proDetail/proDetail?id=' + e.currentTarget.dataset.id
+    })
+  },
+  goCategory(e){
+    let id = e.currentTarget.dataset.id
+    let title = e.currentTarget.dataset.title
+    if(id == '4' || title == '生态黔南'){
+      wx.navigateTo({
+        url: '../articleList/articleList?id=' + 42 + '&title=' + title
+      })
+    }else if(id == '5' || title == '更多'){
+      wx.switchTab({
+        url: '../category/category'
+      })
+    }
+    else{
+      wx.navigateTo({
+        url: '../proList/proList?id=' + id + '&title=' + title
+      })
+    }
+  },
+  homeCategories(e){
+    wx.navigateTo({
+      url: '../homeCategories/homeCategories?cate=' + e.currentTarget.dataset.cate + '&title=' + e.currentTarget.dataset.title
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

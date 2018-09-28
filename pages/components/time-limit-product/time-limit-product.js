@@ -32,6 +32,8 @@ Component({
     for(let item of this.data.productData){
       console.log(item)
     }
+    let demo = this.data.productData[0]
+    let timer = new CountDown(demo.countdown)
   },
   ready: function() {
     console.log(this.data.productData)

@@ -4,7 +4,7 @@
         <swiper indicator-dots="true" autoplay="true" indicator-active-color="#fff" interval="{{interval}}" duration="{{duration}}">
             <block wx:for="{{banner}}" wx:key>
                 <swiper-item>
-                    <image src="{{item}}" mode="widthFix" class="slide-image"/>
+                    <image src="{{item.photo}}" mode="widthFix" class="slide-image"/>
                 </swiper-item>
             </block>
         </swiper>
@@ -17,9 +17,9 @@
         </view>
     </view>
     <view class="category-box row">
-        <view class="category-item col-3" data-id="{{item.id}}" bindtap="goCategory" wx:for="{{categories}}" wx:key>
-            <view class="category-icon"><image class="icon" src="{{item.iconPath}}" mode="widthFix" /></view>
-            <view class="category-text">{{item.text}}</view>
+        <view class="category-item col-3" data-id="{{item.id}}" data-title="{{item.title}}" bindtap="goCategory" wx:for="{{categories}}" wx:key>
+            <view class="category-icon"><image class="icon" src="{{item.photo}}" mode="widthFix" /></view>
+            <view class="category-text">{{item.title}}</view>
         </view>
     </view>
     <view class="dispaly-box">
@@ -27,5 +27,81 @@
             <image class="full-w" src="/asset/img/home_banner_time-limit.png" mode="widthFix" />
         </view>
         <time-limit-product time-limit-class="row" productData="{{timeLimitData}}" ></time-limit-product>
+        <view class="product-banner ad-banner" wx:if="{{listAds[0]}}" bindtap="goAds" data-ad="{{listAds[0]}}">
+            <image class="full-w" src="{{listAds[0].photo}}" mode="widthFix" />
+        </view>
+    </view>
+    <!--newPro-->
+    <view class="display-box">
+        <view class="product-banner" bindtap="homeCategories" data-cate="" data-title="新品上架">
+            <image class="full-w" src="{{categoryBanner.newPro}}" mode="widthFix" />
+        </view>
+        <view class="product-box row">
+            <view class="product-item" data-id="{{item.id}}" bindtap="goDetail" wx:for="{{homeProList.newPro}}" wx:key>
+                <view class="product-img"><image class="full-img" src="{{item.photo}}" mode="widthFix" /></view>
+                <view class="title">{{item.title}}</view>
+                <view class="price-wrap">
+                    <view class="price">￥{{item.price}}</view>
+                    <view class="old-price">￥{{item.oprice}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="product-banner ad-banner" wx:if="{{listAds[1]}}" bindtap="goAds" data-ad="{{listAds[1]}}">
+            <image class="full-w" src="{{listAds[1].photo}}" mode="widthFix" />
+        </view>
+    </view>
+    <!--findPro-->
+    <view class="display-box">
+        <view class="product-banner" bindtap="homeCategories" data-cate="news" data-title="发现好物">
+            <image class="full-w" src="{{categoryBanner.findPro}}" mode="widthFix" />
+        </view>
+        <view class="product-box row">
+            <view class="product-item" data-id="{{item.id}}" bindtap="goDetail" wx:for="{{homeProList.findPro}}" wx:key>
+                <view class="product-img"><image class="full-img" src="{{item.photo}}" mode="widthFix" /></view>
+                <view class="title">{{item.title}}</view>
+                <view class="price-wrap">
+                    <view class="price">￥{{item.price}}</view>
+                    <view class="old-price">￥{{item.oprice}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="product-banner ad-banner" wx:if="{{listAds[2]}}" bindtap="goAds" data-ad="{{listAds[2]}}">
+            <image class="full-w" src="{{listAds[2].photo}}" mode="widthFix" />
+        </view>
+    </view>
+    <!--recHot-->
+    <view class="display-box">
+        <view class="product-banner" bindtap="homeCategories" data-cate="hot" data-title="同城馆">
+            <image class="full-w" src="{{categoryBanner.recHot}}" mode="widthFix" />
+        </view>
+        <view class="product-box row">
+            <view class="product-item" data-id="{{item.id}}" bindtap="goDetail" wx:for="{{homeProList.recHot}}" wx:key>
+                <view class="product-img"><image class="full-img" src="{{item.photo}}" mode="widthFix" /></view>
+                <view class="title">{{item.title}}</view>
+                <view class="price-wrap">
+                    <view class="price">￥{{item.price}}</view>
+                    <view class="old-price">￥{{item.oprice}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="product-banner ad-banner" wx:if="{{listAds[3]}}" bindtap="goAds" data-ad="{{listAds[3]}}">
+            <image class="full-w" src="{{listAds[3].photo}}" mode="widthFix" />
+        </view>
+    </view>
+    <!--hotHouse-->
+    <view class="display-box">
+        <view class="product-banner">
+            <image class="full-w" src="{{categoryBanner.hotHouse}}" mode="widthFix" />
+        </view>
+        <view class="product-box">
+            <view class="full-w hotHouse" data-id="{{item.id}}" bindtap="goDetail" wx:for="{{homeProList.hotHouse}}" wx:key>
+                <view class="product-img"><image class="full-img" src="{{item.photo}}" mode="widthFix" /></view>
+                <view class="title">{{item.title}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="bottom-tip">
+        <view class="logo-icon"><image class="full-w" src="/asset/img/logo.png" mode="widthFix" /></view>
+        <view>好花啊红来好花红呃</view>
     </view>
 </view>

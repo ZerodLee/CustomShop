@@ -1,1 +1,51 @@
 /* pages/cart/cart.wxss */
+.page{
+    width: 100vw;
+    min-height: 100vh;
+    position: relative;
+    background-color: #fef8fe;
+}
+.checkout-bar{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+}
+.all-check{
+    padding: 0 5vw;
+}
+.all-check .middle-text{
+    vertical-align: middle;
+}
+.check-icon{
+    border: 1px solid #ddd;
+    border-radius: 19px;
+    width: 19px;
+    height: 19px;
+    display: inline-block;
+    margin-right: 2vw;
+}
+.summary{
+    display: flex;
+    align-items: center;
+}
+.summary .btn-buy{
+    margin-left: 5vw;
+    padding: 3.2vw 9vw;
+    font-size: 14px;
+    background-color: #f32f52;
+    color: #fff;
+    
+}
+
+.cart-empty{
+    width: 100vw;
+    height: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

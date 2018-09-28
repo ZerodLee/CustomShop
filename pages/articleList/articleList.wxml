@@ -1,0 +1,7 @@
+<!--pages/articleList/articleList.wxml-->
+<view class="art-list">
+    <view class="art-item" wx:for="{{proList}}" wx:key bindtap="goArticle" data-id="{{item.id}}">
+        <view class="item-img"><image class="full-w" src="{{item.thumb}}" mode="widthFix" /></view>
+        <view class="item-name">{{item.title}}</view>
+    </view>
+</view>

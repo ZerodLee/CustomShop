@@ -63,6 +63,7 @@ swiper{
 .category-box{
     box-sizing: border-box;
     padding: 15px;
+    min-height:50vw;
     flex-wrap: wrap;
 }
 .category-box .category-item{
@@ -73,10 +74,95 @@ swiper{
     margin: 10px 0;
 }
 .category-item .category-icon{
-    width: 50%;
+    width: 12vw;
+    height: 12vw;
+    overflow: hidden;
 }
 .category-item .category-text{
     margin-top: 8px;
     font-size: 13px;
 }
 
+.product-box{
+    flex-wrap: wrap;
+    border-top: 1.6vw solid #f1f1f1;
+    background-color: #fff;
+}
+.product-item{
+    width: 49.2vw;
+    border-bottom: 1.6vw solid #f1f1f1;
+    padding: 5px 0;
+}
+.product-item:nth-of-type(odd){
+    border-right: 1.6vw solid #f1f1f1;
+}
+.ad-banner{
+    background-color: #f1f1f1;
+    padding: 0 8px 10px 8px;
+    
+}
+.ad-banner image,.hotHouse image{
+    border-radius: 6px;
+    overflow: hidden;
+}
+.hotHouse{
+    padding: 10px 15px;
+    box-sizing: border-box;
+}
+.countdown{
+    font-size: 16px;
+    padding: 5px 10px;
+}
+.time-number{
+    display: inline-block;
+    margin: 0 5px;
+    background-color: #333233;
+    color: #fff;
+    font-size: 14px;
+    padding: 2px;
+    border-radius: 3px;
+}
+.title{
+    font-size: 16px;
+    color: #333233;
+    padding: 2px 8px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.product-img,.full-img{
+    width: 100%;
+}
+.price-wrap{
+    display: flex;
+    align-items: flex-end;
+    padding: 2px 8px;
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.price{
+    color: #ef2827;
+    font-weight: 600;
+    margin-right: 20px;
+}
+.old-price{
+    font-size: 13px;
+    color: #999;
+    text-decoration:line-through;
+}
+.bottom-tip{
+    background-color: #f1f1f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    color: #999;
+    font-size: 12px;
+}
+.bottom-tip .logo-icon{
+    width: 25px;
+    margin-right: 10px;
+    font-size: 0;
+}

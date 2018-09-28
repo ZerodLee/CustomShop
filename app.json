@@ -1,10 +1,15 @@
 {
   "pages": [
-    "pages/cart/cart",
-    "pages/category/category",
+    "pages/proDetail/proDetail",
     "pages/home/home",
+    "pages/category/category",
+    "pages/cart/cart",
+    "pages/mine/mine",
+    "pages/proList/proList",
+    "pages/homeCategories/homeCategories",
     "pages/index/index",
-    "pages/mine/mine"
+    "pages/articleList/articleList",
+    "pages/webview/webview"
   ],
   "window": {
     "backgroundTextStyle": "dark",

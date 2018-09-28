@@ -1,0 +1,11 @@
+<!--pages/proList/proList.wxml-->
+<view class="pro-list">
+    <view class="pro-item" wx:for="{{proList}}" wx:key bindtap="goDetail" data-id="{{item.id}}">
+        <view class="img"><image class="full-w" src="{{item.thumb}}" mode="widthFix" /></view>
+        <view class="pro-info">
+            <view class="pro-title text-overflow-2">{{item.title}}</view>
+            <view class="sale-amount">销量：{{item.sales}}</view>
+            <view class="price">¥ {{item.price}}</view>
+        </view>
+    </view>
+</view>

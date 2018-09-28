@@ -6,12 +6,6 @@ class Http {
     constructor(){
         
     }
-    // console1(){
-    //     console.log('import',importpromise)
-    // }
-    // console2(){
-    //     console.log('require',Promise)
-    // }
     wxPromisify(fn) {
         return function (obj = {}) {
             return new Promise((resolve, reject) => {
@@ -61,13 +55,16 @@ class Http {
         })
     }
     wxLogin() {
-        return this.wxPromisify(wx.login)
+        let wxLogin = this.wxPromisify(wx.login)
+        return wxLogin()
     }
     wxGetSetting() {
-        return this.wxPromisify(wx.getSetting)
+        let wxGetSetting = this.wxPromisify(wx.getSetting)
+        return wxGetSetting()
     }
     wxGetUserInfo(){
-        return this.wxPromisify(wx.getUserInfo)
+        let wxGetUserInfo = this.wxPromisify(wx.getUserInfo)
+        return wxGetUserInfo()
     }
 
 }
