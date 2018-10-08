@@ -1,1 +1,91 @@
 /* pages/mine/mine.wxss */
+.page{
+    width: 100vw;
+    min-height: 100vh;
+    position: relative;
+    background-color: #fef8fe;
+}
+.header{
+    padding: 15px;
+    padding-bottom: 0;
+    background-color: #fff;
+}
+.header .personal-card{
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.personal-card .personal-info{
+    background-color: #e8e8e8;
+    width: 100%;
+    height: 20vw;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+
+}
+.header .setting-list .item{
+    padding: 10px 0;
+}
+.personal-info .p-img{
+    width: 10vw;
+    height: 10vw;
+    margin: 0 3vw;
+    font-size: 0;
+}
+.personal-info .p-phone{
+    font-size: 13px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.add-info-btn{
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    background-color: #aaa;
+    color: #fff;
+    font-size: 12px;
+    padding: 8px 10px;
+    line-height: 15px;
+    border-top-left-radius: 10vw;
+    border-bottom-left-radius: 10vw;
+}
+.add-info-btn .iconfont{
+    font-size: 8px;
+    margin-left: 5px;
+}
+.personal-card .personal-other{
+    display: flex;
+    font-size: 12px;
+}
+.personal-other .other-info{
+    width: 50%;
+    padding: 8px 0;
+    text-align: center;
+}
+.personal-other .other-info{
+    border-right: 1px solid #fff;
+}
+
+.order-type-wrap{
+    width: 100vw;
+    background-color: #fff;
+}
+.order-type-wrap .order-type{
+    width: 20%;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+}
+.order-type .iconfont{
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+button.login-btn,button.login-btn:active,button.login-btn:focus,.login-box button{
+    background-color: #e8e8e8 !important;
+    border: none !important;
+}

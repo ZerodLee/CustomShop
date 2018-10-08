@@ -29,11 +29,11 @@
         </view>
     </view>
     <view class="swiper-switch">
-        <view class="switch-btn"><view class="text">商品详情</view></view>
-        <view class="switch-btn"><view class="text">评价（2）</view></view>
+        <view class="switch-btn {{detailIndex == 0?'active':''}}" data-index="0" bindtap="switchTab"><view class="text">商品详情</view></view>
+        <view class="switch-btn {{detailIndex == 1?'active':''}}" data-index="1" bindtap="switchTab"><view class="text">评价（2）</view></view>
     </view>
     <view class="pro-detail">
-        <swiper duration="300" bindchange="swiperChange" style="height: {{swiperHeight}}px;">
+        <swiper duration="300" current="{{detailIndex}}" bindchange="swiperChange" style="height: {{swiperHeight}}px;">
             <swiper-item>
                 <rich-text class="detail-content" nodes="{{detail.contentmob}}"></rich-text>
             </swiper-item>
@@ -45,8 +45,8 @@
     </view>
     <view class="btns-bar">
         <view class="left row">
-            <view class="left-btn collect-btn"><view class="">收藏</view></view>
-            <view class="left-btn cart-btn"><view class="">购物车</view></view>
+            <view class="left-btn collect-btn"><view><view class="iconfont icon-shoucang1"></view></view><view class="">收藏</view></view>
+            <view class="left-btn cart-btn"><view><view class="iconfont icon-gouwuche"></view></view><view class="">购物车</view></view>
         </view>
         <view class="right row">
             <view class="right-btn addCart-btn">加入购物车</view>

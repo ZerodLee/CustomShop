@@ -1,0 +1,40 @@
+
+@font-face {
+  font-family: 'iconfont';  /* project id 856976 */
+  src: url('//at.alicdn.com/t/font_856976_0u7uiq55knfp.eot');
+  src: url('//at.alicdn.com/t/font_856976_0u7uiq55knfp.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_856976_0u7uiq55knfp.woff') format('woff'),
+  url('//at.alicdn.com/t/font_856976_0u7uiq55knfp.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_856976_0u7uiq55knfp.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-you:before { content: "\e636"; }
+
+.icon-xiala:before { content: "\e68f"; }
+
+.icon-gouwuche:before { content: "\e605"; }
+
+.icon-kefu:before { content: "\e606"; }
+
+.icon-daifukuan:before { content: "\e609"; }
+
+.icon-daifahuo:before { content: "\e60a"; }
+
+.icon-daipingjia:before { content: "\e60b"; }
+
+.icon-yifahuo:before { content: "\e60c"; }
+
+.icon-shouhou:before { content: "\e60d"; }
+
+.icon-shoucang1:before { content: "\e618"; }
+
+.icon-shoucang2:before { content: "\e630"; }
+

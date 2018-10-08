@@ -1,3 +1,9 @@
+import { Http } from './utils/http'
+import { url } from './utils/static/urls'
+import { showLoading,hideLoading,openAlert } from './utils/util'
+
+const http = new Http()
+const aes =  require('./asset/js/aes')
 App({
       onLaunch: function () {
             // 展示本地存储能力
@@ -10,9 +16,43 @@ App({
             if (openid) {
                   console.log("openid=", wx.getStorageSync("openid"))
                   console.log("session_key=", wx.getStorageSync("session_key"))
-            }
-            else {
+            } else {
                   // 登录
+                  let that = this
+                  showLoading()
+                  http.wxLogin().then(res => {
+                        console.log('1', res)
+                        if (res.code) {
+                              return http.getRequest(url.wxLogin, {
+                                    app_id: that.globalData.config.app_id,
+                                    app_secret: that.globalData.config.app_secret,
+                                    code: res.code
+                              })
+                        } else {
+                              //openAlert('登录失败！')
+                              throw "登录失败！"
+                        }
+                  }).then(res => {
+                        console.log('21',res)
+                        if(res && res.data.secure == 1){
+
+                        }else if (res && res.data.secure == 2) {
+                              //获取openid并保存
+                              let openid = aes.Decrypt(res.data.data)
+                              openid = openid.match(/"(.*?)"/)[1]
+                              console.log('2',openid)
+                              //wx.setStorageSync("openid",openid)
+                              
+                        } else {
+                              throw "获取openid失败！"
+                        }
+                  }).catch(res => {
+                        console.log('error!', res)
+                        that.globalData.bindAccount = null
+                        openAlert(res)
+                  }).finally(() => {
+                        hideLoading()
+                  })
                   // wx.login({
                   //       success: res => {
                   //             // 发送 res.code 到后台换取 openId, sessionKey, unionId
@@ -48,6 +88,7 @@ App({
 
                   //       }
                   // })
+
             }
 
             // 获取用户信息 代码必须写在这里！！！ 还有一个地方是哪个页面需要用户信息，哪个页面再去调用！
@@ -80,10 +121,10 @@ App({
             config: {
                   app_id: "wxcfe48e0e0f3e647c",
                   app_secret: "15af4763520049a652e8d48d989c485d",
-                  
+
             },
-            server:{
-              prefix:"https://www.qntv3h.com/"
+            server: {
+                  prefix: "https://www.qntv3h.com/"
             }
       }
 })

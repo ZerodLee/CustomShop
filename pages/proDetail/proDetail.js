@@ -20,6 +20,7 @@ Page({
     proImg:[{photo:'/asset/img/pro.png'}],
     detail:{},
     swiperHeight:500,
+    detailIndex:0,
   },
 
   /**
@@ -32,9 +33,12 @@ Page({
     http.postRequest(url.getProDetail,{pid:proid,tmpid:865376036149522}).then(res =>{
       console.log('detail',res)
       if(res.data.returnCode == '200'){
-        res.data.data2.detail.contentmob = res.data.data2.detail.contentmob.replace(/\<img/gi,   '<img style="max-width:100%" ' );
+        res.data.data2.detail.contentmob = res.data.data2.detail.contentmob.replace(/\<img/gi,'<img style="max-width:100%;height:auto" class="rich-img" ' );
         that.setData({
           detail:res.data.data2.detail
+        })
+        wx.setNavigationBarTitle({
+          title: res.data.data2.detail.title
         })
       }else if(res.data){
         throw res.data.msg
@@ -49,6 +53,8 @@ Page({
       util.hideLoading()
       that.changeDetailHeight()
     })
+
+    
   },
   changeDetailHeight(index = 0) {
     let that = this
@@ -76,9 +82,21 @@ Page({
   },
   swiperChange(e){
     //console.log(e)
+    this.setData({
+      detailIndex:e.detail.current
+    })
     this.changeDetailHeight(e.detail.current)
   },
-
+  switchTab(e){
+    let index = e.currentTarget.dataset.index
+    console.log(index)
+    if(index != this.data.detailIndex){
+      this.setData({
+        detailIndex:index
+      })
+    }
+    
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

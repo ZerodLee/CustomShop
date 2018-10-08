@@ -1,4 +1,5 @@
 /**app.wxss**/
+@import '/asset/font/iconfont';
 page{
   font-size: 14px;
 }
@@ -11,11 +12,20 @@ page{
   padding: 200rpx 0;
   box-sizing: border-box;
 }
+.page{
+  width: 100vw;
+  min-height: 100vh;
+  position: relative;
+  background-color: #fef8fe;
+}
 .main-color{
   color: #f32f52;
 }
 .second-color{
   color: #ffb030;
+}
+.secondary-color{
+  color: #888;
 }
 .button-effect{
   transition: 0.2s;
@@ -163,6 +173,40 @@ page{
 .full-button:active{
   opacity: 0.8;
 }
+.button-effect{
+  transition: background-color 0.2s;
+}
 .button-effect:active{
   background-color: #eee !important;
+}
+
+.setting-list{
+  background-color: #fff;
+}
+.setting-list .item{
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #dfdfdf;
+  background-color: #fff;
+  transition: background-color 0.2s;
+}
+.setting-list .item:last-child{
+  border-bottom: 0;
+}
+.setting-list .item:active{
+  background-color: #eee;
+}
+.item .arrow{
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  line-height: 14px;
+  color: #aaa;
+}
+.arrow .iconfont{
+  margin-left: 5px;
+  font-size: 12px;
+  color: #aaa;
 }

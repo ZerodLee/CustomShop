@@ -1,11 +1,12 @@
 // pages/home/home.js
 import { Http } from '../../utils/http'
 import { url } from '../../utils/static/urls'
-
+import { CountDown } from '../../utils/countdown'
 const util = require('../../utils/util.js')
 
-const app = getApp()
+//const app = getApp()
 const http = new Http()
+const timeDown = new CountDown()
 Page({
 
   /**
@@ -142,6 +143,9 @@ Page({
       util.openAlert(res)
     }).finally(() => {
       util.hideLoading()
+      if(that.data.timeLimitData.length > 0){
+
+      }
     })
   },
 
@@ -173,6 +177,9 @@ Page({
     wx.navigateTo({
       url: '../homeCategories/homeCategories?cate=' + e.currentTarget.dataset.cate + '&title=' + e.currentTarget.dataset.title
     })
+  },
+  setTimer(){
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -1,0 +1,17 @@
+/* pages/login/login.wxss */
+@import '../../asset/style/inputs';
+.weui-cells{
+    font-size: 15px;
+}
+.btns{
+    padding: 10vw 5vw 5vw;
+}
+.btns .login-btn{
+    height: 45px;
+    line-height: 45px;
+    font-size: 16px;
+}
+.forget-password{
+    display: flex;
+    justify-content: center;
+}

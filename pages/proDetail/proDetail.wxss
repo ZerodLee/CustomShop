@@ -60,9 +60,9 @@
     border-radius: 15px;
     margin-right: 5px;
 }
-.select-bar{
+/* .select-bar{
 
-}
+} */
 .select-bar .select-item{
     padding: 15px 18px;
     display: flex;
@@ -91,11 +91,22 @@
     box-sizing: border-box;
 
 }
+.swiper-switch .switch-btn.active{
+    color: #f32f52;
+    border-bottom: 2px solid #f32f52;
+}
 .switch-btn .text:first-child{
     border-right: 1px solid #dfdfdf;
 }
 .issue{
     min-height: 500px;
+}
+.detail-content{
+    width: 100vw;
+}
+rich-text .rich-img,rich-text p{
+    width: 100% ;
+    height: auto ;
 }
 
 .btns-bar{
@@ -108,6 +119,9 @@
     align-items: center;
     background-color: #fff;
     border-top: 1px solid #dfdfdf;
+}
+.btns-bar .iconfont{
+    font-size: 22px;
 }
 .btns-bar .left-btn,.btns-bar .right-btn{
     display: flex;

@@ -54,6 +54,23 @@ class Http {
             },
         })
     }
+    /**
+     * 微信请求自定义方法封装
+     * url
+     * data 以对象的格式传入
+     * method
+     * type,token
+     */
+    coustomRequest(url, data,method,type,token = '') {
+        var postRequest = this.wxPromisify(wx.request)
+        var header = token?{"content-type": type,"token":token}:{"content-type": type}
+        return postRequest({
+            url: url,
+            method: method,
+            data: data,
+            header: header,
+        })
+    }
     wxLogin() {
         let wxLogin = this.wxPromisify(wx.login)
         return wxLogin()

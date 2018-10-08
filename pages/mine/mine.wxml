@@ -1,2 +1,71 @@
 <!--pages/mine/mine.wxml-->
-<text>pages/mine/mine.wxml</text>
+<view class="page">
+    <view class="header">
+        <view class="personal-card">
+            <view class="personal-info">
+                <view class="p-img"><image class="full-w full-h" src="/asset/img/logo.png" mode="widthFix" /></view>
+                <view class="p-info" wx:if="{{userInfo}}">
+                    <view class="p-name">abc昵称</view>
+                    <view class="p-phone">15623642771</view>
+                </view>
+                <view wx:else class="login-box">
+                    <button class="login-btn" plain="true" hover-class="login-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">登录/注册</button>
+                </view>
+                <view class="add-info-btn">
+                    <view class="c">完善资料</view>
+                    <view class="iconfont icon-you"></view>
+                </view>
+            </view>
+            <view class="personal-other">
+                <view class="other-info">收藏：0</view>
+                <view class="other-info">积分：100</view>
+            </view>
+        </view>
+        <view class="setting-list">
+            <view class="item" bindtap="goOrderList" data-state="all">
+                <view class="item-title">我的订单</view>
+                <view class="arrow"><view class="iconfont icon-you"></view></view>
+            </view>
+        </view>
+    </view>
+    <view class="row order-type-wrap mt-2">
+        <view class="order-type button-effect" bindtap="goOrderList" data-state="topay">
+            <view class="iconfont icon-daifukuan"></view>
+            <view class="type-name">待付款</view>
+        </view>
+        <view class="order-type button-effect" bindtap="goOrderList" data-state="toShip">
+            <view class="iconfont icon-yifahuo"></view>
+            <view class="type-name">待发货</view>
+        </view>
+        <view class="order-type button-effect" bindtap="goOrderList" data-state="toSigning">
+            <view class="iconfont icon-daifahuo"></view>
+            <view class="type-name">待收货</view>
+        </view>
+        <view class="order-type button-effect" bindtap="goOrderList" data-state="toComment">
+            <view class="iconfont icon-daipingjia"></view>
+            <view class="type-name">待评价</view>
+        </view>
+        <view class="order-type button-effect" bindtap="goOrderList" data-state="afterSale">
+            <view class="iconfont icon-shouhou"></view>
+            <view class="type-name">售后</view>
+        </view>
+    </view>
+    <view class="setting-list mt-2">
+        <view class="item">
+            <view class="item-title">我的足迹</view>
+            <view class="arrow">历史记录浏览<view class="iconfont icon-you"></view></view>
+        </view>
+        <view class="item">
+            <view class="item-title">地址管理</view>
+            <view class="arrow"><view class="iconfont icon-you"></view></view>
+        </view>
+        <view class="item">
+            <view class="item-title">帮助中心</view>
+            <view class="arrow"><view class="iconfont icon-you"></view></view>
+        </view>
+        <view class="item">
+            <view class="item-title">关于巨惠好花红</view>
+            <view class="arrow"><view class="iconfont icon-you"></view></view>
+        </view>
+    </view>
+</view>

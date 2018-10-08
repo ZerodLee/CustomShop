@@ -25,7 +25,8 @@ Component({
     // }
   },
   created:function(){
-    console.log(this.data.productData,timeDown)
+    //console.log(this.data.productData,timeDown)
+    timeDown.setCountDown()
   },
   attached:function() {
     console.log(this.data.productData)
@@ -36,6 +37,6 @@ Component({
     let timer = new CountDown(demo.countdown)
   },
   ready: function() {
-    console.log(this.data.productData)
+    //console.log(this.data.productData)
   },
 })

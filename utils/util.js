@@ -137,9 +137,6 @@ function post_json(path, data, success,loading = true) {
             }
       })
 }
-
-
-
 function login(callback){
       // 登录
       wx.login({
@@ -177,17 +174,18 @@ function login(callback){
       })
 }
 
-function get_history(callback){
-      var openid=wx.getStorageSync("openid")      
-      console.log(openid)
-      post_json("/api/JiaHua/get_history",{openid:openid},function(res){
-            callback(res)
-      });
+function verifyLogin(){
+      const  openid = wx.getStorageSync("openid") 
+      const app = getApp()
+      if(app.globalData.uid && openid){
+            return true
+      }else{
+            wx.navigateTo({
+                  url: '../login/login'
+            })
+            return false
+      }
 }
-function get_advice_products(dataObj,success){
-      post_json("/api/jiahua/get_advice_products",dataObj,success);
-}
-
 module.exports = {
-  formatTime,toast,openAlert,openConfirm,showLoading,hideLoading
+  formatTime,toast,openAlert,openConfirm,showLoading,hideLoading,verifyLogin
 }
