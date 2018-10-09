@@ -18,35 +18,59 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if(app.globalData.user && wx.getStorageSync("openid")){
-      this.setData({
-        user:app.globalData.user
-      })
-    }
+    // if(app.globalData.user && wx.getStorageSync("openid")){
+      // this.setData({
+      //   user:app.globalData.user
+      // })
+    // }
   },
 
   goOrderList(e){
     //验证登录
-    if(!util.verifyLogin()){
-      return false
-    }
-    
+    // if(!util.verifyLogin()){
+    //   return false
+    // }else{
+    //   wx.navigateTo({
+    //     url: '../orderList/orderList?state=' + e.currentTarget.dataset.state
+    //   })
+    // }
+    wx.navigateTo({
+      url: '../orderList/orderList?state=' + e.currentTarget.dataset.state
+    })
   },
   getUserInfo: function(e) {
     console.log(e)
     if(e.detail.userInfo){
       app.globalData.userInfo = e.detail.userInfo
-      
-      // this.setData({
-      //   userInfo: e.detail.userInfo,
-      // })
+      //this.goPersonalInfo(null,e.detail.userInfo)
     }
-    if(!this.data.user){
-      wx.navigateTo({
-        url: '../login/login'
-      })
-    }
-    
+  },
+  goHistory(e){
+    wx.navigateTo({
+      url: '../history/history'
+    })
+  },
+  goPersonalInfo(e,params){
+    //let paramsStr = params?JSON.stringify(params):''
+    wx.navigateTo({
+      url: '../signUp/signUp?params=' + JSON.stringify(this.data.user)
+    })
+  },
+  getUserInfo(e){
+    let that = this
+    http.coustomRequest(url.getUserInfo,{},'GET','application/json',app.globalData.user.token).then(res =>{
+      console.log('getUserInfo',res)
+      if(res.data.returnCode == '200'){
+        this.setData({
+          user:res.data.data2
+        })
+      }else{
+        throw res.data.msg
+      }
+    }).catch(res =>{
+      console.log(res)
+      util.openAlert(res)
+    })
   },
 
   /**
@@ -60,7 +84,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    // if(this.data.user.id != app.globalData.user.id){
+    //   this.setData({
+    //     user:app.globalData.user
+    //   })
+    // }
+    this.getUserInfo()
   },
 
   /**

@@ -41,7 +41,10 @@ const url = {
     getOrderlist: prefix + 'out/index.php/apporder/orderList',//{status=4,userid=3620,limit=10,page=1} 获取我的订单
     getHistory: prefix + 'out/index.php/appbrowse/plist', //{uid=3620,limit=10,page=1} 我的足迹
     
-
+    changeName: prefix + 'out/index.php/appmember/changename', // {id,nickname} 编辑--昵称
+    uploadFile: prefix + 'out/index.php/appmember/upload_file', // Content-Type: multipart/form-data {id} 编辑--头像
+    changeGender: prefix + 'out/index.php/appmember/changegender', // {id,gender(1,0)} 编辑--性别
+    changeBirth: prefix + 'out/index.php/appmember/changebirth', // {id,birthday} 编辑--生日
 
 }
 export {url}

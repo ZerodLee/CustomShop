@@ -12,8 +12,8 @@ App({
             //wx.setStorageSync('logs', logs)
 
             var openid = wx.getStorageSync("openid")
-            // console.log(openid)
-            if (openid) {
+            // 每次都登录
+            if (false) {
                   console.log("openid=", wx.getStorageSync("openid"))
                   console.log("session_key=", wx.getStorageSync("session_key"))
             } else {
@@ -23,7 +23,7 @@ App({
                   http.wxLogin().then(res => {
                         console.log('1', res)
                         if (res.code) {
-                              return http.getRequest(url.wxLogin, {
+                              return http.postRequest(url.wxLogin, {
                                     app_id: that.globalData.config.app_id,
                                     app_secret: that.globalData.config.app_secret,
                                     code: res.code
@@ -34,18 +34,23 @@ App({
                         }
                   }).then(res => {
                         console.log('21',res)
-                        if(res && res.data.secure == 1){
+                        if(res.data.returnCode == '200'){
+                              if(res && res.data.secure == 1){
 
-                        }else if (res && res.data.secure == 2) {
+                              }else if (res && res.data.secure == 2) {
+                                     
+                              }
                               //获取openid并保存
-                              let openid = aes.Decrypt(res.data.data)
-                              openid = openid.match(/"(.*?)"/)[1]
-                              console.log('2',openid)
-                              //wx.setStorageSync("openid",openid)
-                              
+                              let user = aes.Decrypt(res.data.data)
+                              user = JSON.parse(user.match(/({.*})/)[1])
+                              console.log('2',user)
+                              wx.setStorageSync("openid",user.minpro_openid)
+                              user.id = +user.id
+                              that.globalData.user = user
                         } else {
                               throw "获取openid失败！"
                         }
+                        
                   }).catch(res => {
                         console.log('error!', res)
                         that.globalData.bindAccount = null
@@ -118,6 +123,7 @@ App({
       },
       globalData: {
             userInfo: null,
+            user:null,
             config: {
                   app_id: "wxcfe48e0e0f3e647c",
                   app_secret: "15af4763520049a652e8d48d989c485d",

@@ -1,8 +1,39 @@
 <!--pages/checkout/checkout.wxml-->
 
 <view class="page">
-    <view class="address"></view>
-    <view class="cart-list">
+    <view class="address">
+        <view class="has-address" wx:if="{{address}}">
+            <view class="consignee">
+                <view class="name">联系人：{{address.name}}</view>
+                <view class="telephone">{{address.phone}}</view>
+            </view>
+            <view class="address-detail setting-list">
+                <view class="item" bindtap="selectAddress">
+                    <view class="item-title text-overflow"><text class="iconfont icon-dizhi"></text>{{address.address}}</view>
+                    <view class="arrow"><view class="iconfont icon-you"></view></view>
+                </view>
+            </view>
+        </view>
+        <view class="has-not-address" wx:else>
+            <view class="add-address" bindtap="selectAddress">
+                <text class="iconfont icon-dizhi"></text> 添加收货地址
+            </view>
+        </view>
+    </view>
+    <view class="cart-list mt-2">
+        <view class="pro-item">
+            <view class="pro-img shrink-0"><image class="full-w full-h" src="/asset/img/pro.png" mode="widthFix" /></view>
+            <view class="pro-info">
+                <view class="pro-title text-overflow-2">商品名字的名字名字商品名字的名字名字商品名字的名字名字商品名字的名字名字</view>
+                <view class="pro-prop text-overflow">鞋子 ✍🏻 1.55kg brown</view>
+                <view class="amount">
+                    <view class="price main-color">￥125.00</view>
+                    <view class="number">
+                        <view >x1</view>
+                    </view>
+                </view>
+            </view>
+        </view>
         <view class="pro-item">
             <view class="pro-img shrink-0"><image class="full-w full-h" src="/asset/img/pro.png" mode="widthFix" /></view>
             <view class="pro-info">
@@ -17,7 +48,7 @@
             </view>
         </view>
     </view>
-    <view class="setting-list mt-2">
+    <view class="order-items setting-list mt-2">
         <view class="item">
             <view class="item-title">邮费</view>
             <view class="arrow"><view class="main-color">免邮费</view></view>

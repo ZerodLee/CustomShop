@@ -5,7 +5,7 @@ import regeneratorRuntime from '../../asset/js/runtime' //使用es2017 async函�
 
 const util = require('../../utils/util.js')
 
-//const app = getApp()
+const app = getApp()
 const http = new Http()
 Page({
 
@@ -21,6 +21,11 @@ Page({
     detail:{},
     swiperHeight:500,
     detailIndex:0,
+
+    selected:{attrid1:0,num:0,pid:0,tmpid:url.tmpid,uid:0},
+
+    cartNumber:0,
+    showSpec:false,
   },
 
   /**
@@ -96,6 +101,11 @@ Page({
       })
     }
     
+  },
+  addCart(e){
+    this.setData({
+      showSpec:!this.data.showSpec
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -46,11 +46,30 @@
     <view class="btns-bar">
         <view class="left row">
             <view class="left-btn collect-btn"><view><view class="iconfont icon-shoucang1"></view></view><view class="">收藏</view></view>
-            <view class="left-btn cart-btn"><view><view class="iconfont icon-gouwuche"></view></view><view class="">购物车</view></view>
+            <view class="left-btn cart-btn">
+                <view><view class="iconfont icon-gouwuche"></view></view><view class="">购物车</view>
+                <view class="badge" wx:if="{{cartNumber}}">{{cartNumber}}</view>
+            </view>
         </view>
         <view class="right row">
-            <view class="right-btn addCart-btn">加入购物车</view>
+            <view class="right-btn addCart-btn" bindtap="addCart">加入购物车</view>
             <view class="right-btn buy-btn">立即购买</view>
         </view>
     </view>
+    <view class="selectSpec {{showSpec?'show':'hide'}}">
+            <view class="sub-title">类型</view>
+            <view class="sub-cate row">
+                <view class="cate-item {{item.selected?'active':''}}" wx:for="{{highLevelItems.filter}}" wx:key bindtap="selectHighLevelItem" wx:for-index="idx" data-index="{{idx}}" data-id="{{item.id}}">{{item.title}}</view>
+            </view>
+            <view class="sub-title">价格</view>
+            <view class="filter-price sub-cate row">
+                <view class="col-5"><input bindinput="bindLowPrice" value="{{highLevelItems.lprice}}" placeholder="最低价格"/></view>
+                <view class="col-2">至</view>
+                <view class="col-5"><input bindinput="bindHighPrice" value="{{highLevelItems.hprice}}" placeholder="最高价格"/></view>
+            </view>
+            <button class="filter-btn full-button" bindtap="comfirmHighLevel">确定</button>
+            <button class="filter-btn full-button" bindtap="resetHighLevel" type="default">重置</button>
+         </view>
+         <view class="cover {{(showFilter || showHighLevel)?'d-show':'d-hide'}}" wx:if="{{true}}" catchtouchmove="closeFilter"></view>
+         
 </view>

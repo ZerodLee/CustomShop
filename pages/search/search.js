@@ -1,16 +1,11 @@
-// pages/login/login.js
+// pages/search/search.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    phone:'',
-    vcode:'',
-    res_code:null,
-    vcodeDisabled:false,
-    countNumber:0,
-    vcodeText:'获取验证码'
+
   },
 
   /**
@@ -18,6 +13,27 @@ Page({
    */
   onLoad: function (options) {
 
+  },
+  showInput: function () {
+    this.setData({
+        inputShowed: true
+    });
+  },
+  hideInput: function () {
+      this.setData({
+          inputVal: "",
+          inputShowed: false
+      });
+  },
+  clearInput: function () {
+      this.setData({
+          inputVal: ""
+      });
+  },
+  inputTyping: function (e) {
+      this.setData({
+          inputVal: e.detail.value
+      });
   },
 
   /**

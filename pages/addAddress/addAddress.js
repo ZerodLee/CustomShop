@@ -1,16 +1,11 @@
-// pages/login/login.js
+// pages/addAddress/addAddress.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    phone:'',
-    vcode:'',
-    res_code:null,
-    vcodeDisabled:false,
-    countNumber:0,
-    vcodeText:'获取验证码'
+    region: ['', '', ''],
   },
 
   /**
@@ -19,7 +14,11 @@ Page({
   onLoad: function (options) {
 
   },
-
+  bindRegionChange: function (e){
+    this.setData({
+      region: e.detail.value
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

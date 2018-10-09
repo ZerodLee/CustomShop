@@ -177,7 +177,7 @@ function login(callback){
 function verifyLogin(){
       const  openid = wx.getStorageSync("openid") 
       const app = getApp()
-      if(app.globalData.uid && openid){
+      if(app.globalData.user && openid){
             return true
       }else{
             wx.navigateTo({

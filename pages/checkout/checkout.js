@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    address:null,
   },
 
   /**
@@ -13,6 +13,11 @@ Page({
    */
   onLoad: function (options) {
 
+  },
+  selectAddress(e){
+    wx.navigateTo({
+      url: '../addressList/addressList'
+    })
   },
 
   /**
@@ -26,7 +31,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let address = wx.getStorageSync('defaultAddress')
+    if(address){
+      console.log('defaultAddress',address)
+      this.setData({
+        address:address
+      })
+    }
+    
   },
 
   /**

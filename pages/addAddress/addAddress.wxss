@@ -1,0 +1,15 @@
+/* pages/addAddress/addAddress.wxss */
+@import '../../asset/style/inputs';
+.weui-cells{
+    font-size: 15px;
+}
+.checkout-bar{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+}

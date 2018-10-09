@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    switchItems:{all:0,topay:1,toShip:2,toSigning:3,toComment:4},
+    orderList:[{},{},{},{},{}],
+    listIndex:0,
   },
 
   /**
@@ -13,6 +15,24 @@ Page({
    */
   onLoad: function (options) {
 
+    console.log('options',options)
+    this.switchTab(null,this.data.switchItems[options.state])
+  },
+  swiperChange(e){
+    //console.log(e)
+    this.setData({
+      listIndex:e.detail.current
+    })
+  },
+  switchTab(e,target){
+    let index = target == undefined?e.currentTarget.dataset.index:target
+    console.log(index)
+    if(index != this.data.listIndex){
+      this.setData({
+        listIndex:index
+      })
+    }
+    
   },
 
   /**

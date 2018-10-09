@@ -111,6 +111,7 @@ rich-text .rich-img,rich-text p{
 
 .btns-bar{
     position: fixed;
+    z-index: 99;
     bottom: 0;
     left: 0;
     width: 100vw;
@@ -138,6 +139,17 @@ rich-text .rich-img,rich-text p{
     color: #888;
     border-right: 1px solid #dfdfdf;
     font-size: 12px;
+    position: relative;
+}
+.left-btn .badge{
+    position: absolute;
+    padding: 2px 5px;
+    background-color: #f32f52;
+    color: #fff;
+    font-size: 10px;
+    border-radius: 5vw;
+    top: 1vw;
+    right: 3vw;
 }
 .btns-bar .right-btn{
     width: 30vw;
@@ -151,4 +163,31 @@ rich-text .rich-img,rich-text p{
 }
 .buy-btn{
     background-color: #f32f52;
+}
+
+.cover{
+    position: fixed;
+    z-index: 9;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.2)
+}
+.selectSpec{
+    position: fixed;
+    z-index: 10;
+    width: 100vw;
+    bottom: -50vw;
+    left: 0;
+    background-color: #fff;
+    padding: 3px 20px;
+    box-sizing: border-box;
+    transition: bottom 0.3s ease-out;
+}
+.selectSpec.hide{
+    bottom: -50vw;
+}
+.selectSpec.show{
+    bottom: 10vw;
 }

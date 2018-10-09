@@ -28,9 +28,11 @@
     padding: 10px 0;
 }
 .personal-info .p-img{
-    width: 10vw;
-    height: 10vw;
+    width: 11vw;
+    height: 11vw;
     margin: 0 3vw;
+    border-radius: 11vw;
+    overflow: hidden;
     font-size: 0;
 }
 .personal-info .p-phone{

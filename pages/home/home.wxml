@@ -9,7 +9,7 @@
             </block>
         </swiper>
         <view class="bottm-bar"></view>
-        <view class="search-bar">
+        <view class="search-bar" bindtap="goSearch">
             <view class="logo"><image class="full-w full-h" src="/asset/img/logo.png" mode="widthFix" /></view>
             <view class="search-min-line"></view>
             <view class="search-icon"><image class="full-w full-h" src="/asset/img/home_icon_search.png" mode="widthFix" /></view>

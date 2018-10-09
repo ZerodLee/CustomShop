@@ -71,6 +71,32 @@ class Http {
             header: header,
         })
     }
+    tokenPostRequest(url, data,token = '') {
+        var postRequest = this.wxPromisify(wx.request)
+        return postRequest({
+            url: url,
+            method: 'POST',
+            data: data,
+            header: {
+                "content-type": "application/x-www-form-urlencoded",
+                "token":token
+            },
+        })
+    }
+
+    uploadFile(url,filePath,formData,token){
+        var uploadRequest = this.wxPromisify(wx.uploadFile)
+        return uploadRequest({
+            url: url,
+            filePath: filePath,
+            name: 'pic_head',
+            formData: formData,
+            header: {
+                "token":token
+            },
+        })
+    }
+
     wxLogin() {
         let wxLogin = this.wxPromisify(wx.login)
         return wxLogin()

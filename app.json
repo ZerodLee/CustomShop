@@ -1,8 +1,9 @@
 {
   "pages": [
-    
-    "pages/checkout/checkout",
     "pages/home/home",
+    "pages/orderList/orderList",
+    "pages/addAddress/addAddress",
+    "pages/checkout/checkout",
     "pages/signUp/signUp",
     "pages/login/login",
     "pages/mine/mine",
@@ -13,8 +14,10 @@
     "pages/homeCategories/homeCategories",
     "pages/articleList/articleList",
     "pages/webview/webview",
-    "pages/orderList/orderList",
-    "pages/index/index"
+    "pages/index/index",
+    "pages/addressList/addressList",
+    "pages/history/history",
+    "pages/search/search"
   ],
   "window": {
     "backgroundTextStyle": "dark",

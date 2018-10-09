@@ -1,0 +1,28 @@
+<!--pages/addressList/addressList.wxml-->
+<view class="page">
+    <radio-group class="address-list radio-group" bindchange="radioChange">
+        <view class="address-item" wx:for="{{addressList}}" wx:key>
+            <view class="address-info button-effect" data-item="{{item}}" bindtap="chooseAddress">
+                <view class="consignee">
+                    <view class="name">联系人：{{item.name}}</view>
+                    <view class="telephone">{{item.phone}}</view>
+                </view>
+                <view class="address-detail">{{item.address}}</view>
+            </view>
+            <view class="edit-bar">
+                <view>
+                    <label class="radio">
+                        <radio value="{{item.id}}" color="#f32f52" checked="{{item.checked}}"/>默认地址
+                    </label>
+                </view>
+                <view class="tools">
+                    <view class="mr-2"><text class="iconfont icon-bianji mr-1"></text>编辑</view>
+                    <view class="mr-2"><text class="iconfont icon-shanchu mr-1"></text>删除</view>
+                </view>
+            </view>
+        </view>
+    </radio-group>
+    <view class="add-address checkout-bar">
+        <view class="full-button" bindtap="addAddress">添加收货地址</view>
+    </view>
+</view>

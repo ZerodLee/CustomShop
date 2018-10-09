@@ -1,0 +1,48 @@
+/* pages/addressList/addressList.wxss */
+.page{
+    padding-bottom: 45px;
+    box-sizing: border-box;
+}
+.address-list{
+}
+.address-list .address-item{
+    background-color: #fff;
+    margin-bottom: 5px;
+}
+.address-item .address-info{
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+.address-info .consignee{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    padding: 0 15px;
+}
+.address-info .address-detail{
+    padding: 5px 15px;
+}
+.edit-bar{
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+}
+.tools{
+    display: flex;
+    justify-content: space-between;
+}
+.edit-bar .radio{
+    padding: 10px 0;
+}
+
+.checkout-bar{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+}

@@ -11,3 +11,24 @@
     line-height: 45px;
     font-size: 16px;
 }
+
+.weui-cell.weui-cell_select{
+    padding: 0;
+    padding-left: 15px;
+}
+.weui-select{
+    border-right: 0;
+}
+.avatar{
+    float: right;
+    padding: 8px;
+    width: 30px;
+    height: 30px;
+}
+.avatar image{
+    border-radius: 30px;
+    overflow: hidden;
+}
+.picker{
+    text-align: right;
+}

@@ -3,22 +3,22 @@
     <view class="header">
         <view class="personal-card">
             <view class="personal-info">
-                <view class="p-img"><image class="full-w full-h" src="/asset/img/logo.png" mode="widthFix" /></view>
-                <view class="p-info" wx:if="{{userInfo}}">
-                    <view class="p-name">abc昵称</view>
-                    <view class="p-phone">15623642771</view>
+                <view class="p-img"><image class="full-w full-h" src="{{user.pic_head}}" mode="widthFix" /></view>
+                <view class="p-info" wx:if="{{user.nickname}}">
+                    <view class="p-name">{{user.nickname}}</view>
+                    <view class="p-phone">{{user.title}}</view>
                 </view>
                 <view wx:else class="login-box">
-                    <button class="login-btn" plain="true" hover-class="login-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">登录/注册</button>
+                    <button class="login-btn" plain="true" hover-class="login-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">微信登录</button>
                 </view>
-                <view class="add-info-btn">
+                <view class="add-info-btn" bindtap="goPersonalInfo">
                     <view class="c">完善资料</view>
                     <view class="iconfont icon-you"></view>
                 </view>
             </view>
             <view class="personal-other">
-                <view class="other-info">收藏：0</view>
-                <view class="other-info">积分：100</view>
+                <view class="other-info">收藏：{{user.colnuumber}}</view>
+                <view class="other-info">积分：{{user.integral}}</view>
             </view>
         </view>
         <view class="setting-list">
@@ -51,7 +51,7 @@
         </view>
     </view>
     <view class="setting-list mt-2">
-        <view class="item">
+        <view class="item" bindtap="goHistory">
             <view class="item-title">我的足迹</view>
             <view class="arrow">历史记录浏览<view class="iconfont icon-you"></view></view>
         </view>

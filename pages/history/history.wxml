@@ -1,0 +1,29 @@
+<!--pages/history/history.wxml-->
+<view class="cart-list mt-2">
+    <view class="pro-item">
+        <view class="pro-img shrink-0"><image class="full-w full-h" src="/asset/img/pro.png" mode="widthFix" /></view>
+        <view class="pro-info">
+            <view class="pro-title text-overflow-2">商品名字的名字名字商品名字的名字名字商品名字的名字名字商品名字的名字名字</view>
+            <view class="pro-prop text-overflow">鞋子 ✍🏻 1.55kg brown</view>
+            <view class="amount">
+                <view class="price main-color">￥125.00</view>
+                <view class="number">
+                    
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="pro-item">
+        <view class="pro-img shrink-0"><image class="full-w full-h" src="/asset/img/pro.png" mode="widthFix" /></view>
+        <view class="pro-info">
+            <view class="pro-title text-overflow-2">商品名字的名字名字商品名字的名字名字商品名字的名字名字商品名字的名字名字</view>
+            <view class="pro-prop text-overflow">鞋子 ✍🏻 1.55kg brown</view>
+            <view class="amount">
+                <view class="price main-color">￥125.00</view>
+                <view class="number">
+                    
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
