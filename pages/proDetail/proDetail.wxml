@@ -4,33 +4,43 @@
         <swiper indicator-dots="true" autoplay="true" indicator-active-color="#fff" interval="{{interval}}" duration="{{duration}}">
             <block wx:for="{{detail.photoinfo}}" wx:key>
                 <swiper-item class="img-fixed-width">
-                    <image src="{{item}}" mode="widthFix" class="slide-image"/>
+                    <image src="{{item}}" mode="widthFix" class="slide-image" />
                 </swiper-item>
             </block>
         </swiper>
     </view>
     <view class="pro-info">
         <view class="pro-title text-overflow-2">{{detail.title}}</view>
-        <view class="price-text"><view class="price">￥{{detail.price}} </view><view class="old-price">￥{{detail.oprice}} </view></view>
+        <view class="price-text">
+            <view class="price">￥{{detail.price}} </view>
+            <view class="old-price">￥{{detail.oprice}} </view>
+        </view>
         <view class="pro-other">
             <view>运费： ￥{{detail.freight}}</view>
             <view>销量： {{detail.sales}}件</view>
         </view>
     </view>
     <view class="pro-tags">
-        <view class="pro-tag"><icon class="tag-icon" type="success_no_circle" size="10" color="#f32f52"/>品质保证</view>
-        <view class="pro-tag"><icon class="tag-icon" type="success_no_circle" size="10" color="#f32f52"/>购物赠积分</view>
-        <view class="pro-tag"><icon class="tag-icon" type="success_no_circle" size="10" color="#f32f52"/>优质服务</view>
+        <view class="pro-tag">
+            <icon class="tag-icon" type="success_no_circle" size="10" color="#f32f52" />品质保证</view>
+        <view class="pro-tag">
+            <icon class="tag-icon" type="success_no_circle" size="10" color="#f32f52" />购物赠积分</view>
+        <view class="pro-tag">
+            <icon class="tag-icon" type="success_no_circle" size="10" color="#f32f52" />优质服务</view>
     </view>
     <view class="select-bar">
-        <view class="select-item">
-            <view class="select-title">选择 规格/分类</view>
-            <view class="arrow-icon"></view>
+        <view class="select-item" bindtap="switchSpec">
+            <view class="select-title text-overflow">选择 {{selected?selected.attr1name:'规格/分类'}}</view>
+            <view class="iconfont icon-you"></view>
         </view>
     </view>
     <view class="swiper-switch">
-        <view class="switch-btn {{detailIndex == 0?'active':''}}" data-index="0" bindtap="switchTab"><view class="text">商品详情</view></view>
-        <view class="switch-btn {{detailIndex == 1?'active':''}}" data-index="1" bindtap="switchTab"><view class="text">评价（2）</view></view>
+        <view class="switch-btn {{detailIndex == 0?'active':''}}" data-index="0" bindtap="switchTab">
+            <view class="text">商品详情</view>
+        </view>
+        <view class="switch-btn {{detailIndex == 1?'active':''}}" data-index="1" bindtap="switchTab">
+            <view class="text">评价（2）</view>
+        </view>
     </view>
     <view class="pro-detail">
         <swiper duration="300" current="{{detailIndex}}" bindchange="swiperChange" style="height: {{swiperHeight}}px;">
@@ -45,31 +55,50 @@
     </view>
     <view class="btns-bar">
         <view class="left row">
-            <view class="left-btn collect-btn"><view><view class="iconfont icon-shoucang1"></view></view><view class="">收藏</view></view>
-            <view class="left-btn cart-btn">
-                <view><view class="iconfont icon-gouwuche"></view></view><view class="">购物车</view>
-                <view class="badge" wx:if="{{cartNumber}}">{{cartNumber}}</view>
+            <view class="left-btn collect-btn" bindtap="collect">
+                <view>
+                    <view wx:if="{{product.is_collection}}" class="iconfont icon-shoucang2 main-color"></view>
+                    <view wx:else class="iconfont icon-shoucang1"></view>
+                </view>
+                <view class="">收藏</view>
+            </view>
+            <view class="left-btn cart-btn" bindtap="goCart">
+                <view>
+                    <view class="iconfont icon-gouwuche"></view>
+                </view>
+                <view class="">购物车</view>
+                <view class="badge" wx:if="{{product.shopcart_number}}">{{product.shopcart_number}}</view>
             </view>
         </view>
         <view class="right row">
             <view class="right-btn addCart-btn" bindtap="addCart">加入购物车</view>
-            <view class="right-btn buy-btn">立即购买</view>
+            <view class="right-btn buy-btn" bindtap="justBuy">立即购买</view>
         </view>
     </view>
     <view class="selectSpec {{showSpec?'show':'hide'}}">
-            <view class="sub-title">类型</view>
-            <view class="sub-cate row">
-                <view class="cate-item {{item.selected?'active':''}}" wx:for="{{highLevelItems.filter}}" wx:key bindtap="selectHighLevelItem" wx:for-index="idx" data-index="{{idx}}" data-id="{{item.id}}">{{item.title}}</view>
+        <view class="pro-display">
+            <view class="pro-img"><image src="{{selected?selected.photo:detail.photo}}" mode="widthFix" class="full-w full-h" /></view>
+            <view class="pro-price">
+                <view class="price">￥{{selected?selected.price:detail.price}}</view>
+                <view class="title">库存：{{selected?selected.stock:detail.stock}}</view>
             </view>
-            <view class="sub-title">价格</view>
-            <view class="filter-price sub-cate row">
-                <view class="col-5"><input bindinput="bindLowPrice" value="{{highLevelItems.lprice}}" placeholder="最低价格"/></view>
-                <view class="col-2">至</view>
-                <view class="col-5"><input bindinput="bindHighPrice" value="{{highLevelItems.hprice}}" placeholder="最高价格"/></view>
+        </view>
+        <view class="specs-wrap">
+            <view class="title">规格</view>
+            <view class="specs">
+                <view class="spec-item {{item.selected?'active':''}}" wx:for="{{product.allsize}}" wx:key data-item="{{item}}" bindtap="chooseSpec">{{item.attr1name}}</view>
+               
             </view>
-            <button class="filter-btn full-button" bindtap="comfirmHighLevel">确定</button>
-            <button class="filter-btn full-button" bindtap="resetHighLevel" type="default">重置</button>
-         </view>
-         <view class="cover {{(showFilter || showHighLevel)?'d-show':'d-hide'}}" wx:if="{{true}}" catchtouchmove="closeFilter"></view>
-         
+        </view>
+        <view class="count">
+            <view class="title">购买数量</view>
+            <view class="edit-count">
+                <view class="sub" data-state="sub" bindtap="changeCount">-</view>
+                <view class="number">{{selectedObj.num}}</view>
+                <view class="add" data-state="add" bindtap="changeCount">+</view>
+            </view>
+        </view>
+    </view>
+    <view class="cover {{showSpec?'d-show':'d-hide'}}" catchtouchmove="closeSpec"></view>
+
 </view>

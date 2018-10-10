@@ -1,4 +1,11 @@
 // pages/orderList/orderList.js
+import { Http } from '../../utils/http'
+import { url } from '../../utils/static/urls'
+
+const util = require('../../utils/util.js')
+
+const app = getApp()
+const http = new Http()
 Page({
 
   /**
@@ -8,6 +15,7 @@ Page({
     switchItems:{all:0,topay:1,toShip:2,toSigning:3,toComment:4},
     orderList:[{},{},{},{},{}],
     listIndex:0,
+    pageParam:{userid:0,status:5,page:1,limit:10}
   },
 
   /**
@@ -15,6 +23,10 @@ Page({
    */
   onLoad: function (options) {
 
+    this.setData({
+      'pageParam.userid':app.globalData.user.id
+    })
+    this.loadOrder(this.data.pageParam)
     console.log('options',options)
     this.switchTab(null,this.data.switchItems[options.state])
   },
@@ -33,6 +45,24 @@ Page({
       })
     }
     
+  },
+  loadOrder(params){
+    let that = this
+    util.showLoading()
+    http.tokenPostRequest(url.getOrderlist,params,app.globalData.user.token).then(res =>{
+      console.log(res)
+      if(res.data.returnCode == '200'){
+        // util.toast(res.data.msg,'none')
+        // that.setData({
+        //   orderInfo: res.data.data2,
+        //   address:res.data.data2.addr_rs
+        // })
+      }
+    }).catch(res =>{
+      util.openAlert(res)
+    }).finally(() => {
+      util.hideLoading()
+    })
   },
 
   /**

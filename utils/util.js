@@ -174,6 +174,15 @@ function login(callback){
       })
 }
 
+function isPhoneAvailable(phonevalue){
+      let phoneReg = /^1[3-578]\d{9}$/
+      if(phoneReg.test(phonevalue)){
+            return true;
+      }else{
+            return false;
+      }
+}
+
 function verifyLogin(){
       const  openid = wx.getStorageSync("openid") 
       const app = getApp()
@@ -187,5 +196,5 @@ function verifyLogin(){
       }
 }
 module.exports = {
-  formatTime,toast,openAlert,openConfirm,showLoading,hideLoading,verifyLogin
+  formatTime,toast,openAlert,openConfirm,showLoading,hideLoading,verifyLogin,isPhoneAvailable
 }

@@ -56,6 +56,11 @@ Page({
       url: '../signUp/signUp?params=' + JSON.stringify(this.data.user)
     })
   },
+  goAddressList(e){
+    wx.navigateTo({
+      url: '../addressList/addressList'
+    })
+  },
   getUserInfo(e){
     let that = this
     http.coustomRequest(url.getUserInfo,{},'GET','application/json',app.globalData.user.token).then(res =>{

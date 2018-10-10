@@ -34,7 +34,13 @@ const url = {
     getCart: prefix + 'out/index.php/appshopcart/list_shopcart',//{limit:10,page:1,uid:3620,tmpid:865376036149522} 购物车数据列表
     editCartNumber: prefix + 'out/index.php/appshopcart/edit_shopcart',// {id:160（商品id）,num:3,tmpid,uid:3620} 编辑--更新商品数量
     comfirmBuy: prefix + 'out/index.php/appshoporder/get_buypro ',//{shopids:[1160],uid:3620}结算--确认订单
-    submitOrer: prefix + 'out/index.php/appshoporder/sub_orderinfo ',//{shopids=[1106，903],addrid=437,is_jf=0,uid=3620}提交订单--创建订单
+    submitOrder: prefix + 'out/index.php/appshoporder/sub_orderinfo ',//{shopids=[1106，903],addrid=437,is_jf=0,uid=3620}提交订单--创建订单
+
+    addCart: prefix + 'out/index.php/appshopcart/add_shopcart', //{attrid,num,pid,tmpid,uid} 加入购物车
+    collection: prefix + 'out/index.php/appcollection/collection', //{proid,uid} 添加收藏/取消收藏
+    justBuy: prefix + 'out/index.php/appshoporder/get_buynowpro',// {attrid1,num,pid,uid} 立即购买
+    submitOrderNow: prefix + 'out/index.php/appshoporder/sub_bunoworderinfo', //{attrid1,addrid,id_jf,num,pid,uid} 提价订单
+
 
     //个人中心
     getUserInfo: prefix + 'out/index.php/appmember/userinfo',//header:token 获取用户信息（详细信息，非微信信息）
@@ -45,6 +51,15 @@ const url = {
     uploadFile: prefix + 'out/index.php/appmember/upload_file', // Content-Type: multipart/form-data {id} 编辑--头像
     changeGender: prefix + 'out/index.php/appmember/changegender', // {id,gender(1,0)} 编辑--性别
     changeBirth: prefix + 'out/index.php/appmember/changebirth', // {id,birthday} 编辑--生日
+
+    getAddress: prefix + 'out/index.php/appmebaddr/get_addrlist',// token 地址管理--列表
+    addAddress: prefix + 'out/index.php/appmebaddr/add_addr', //{addr,city,is_default=1,province,tel,username} token 添加新地址
+    editAddress: prefix + 'out/index.php/appmebaddr/edit_addr',// {同上} 编辑地址--修改
+    deleteAddress: prefix + 'out/index.php/appmebaddr/del_addr',//{id} token 删除地址
+    defaultAddress: prefix + 'out/index.php/appmebaddr/edit_default_addr', // {id,is_default} 设为默认地址
+
+    //支付
+    getPayParam: prefix + 'out/index.php/appshoporder/rsaSign',// {id,type,uid} 支付--获取支付参数
 
 }
 export {url}

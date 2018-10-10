@@ -55,7 +55,7 @@
             <view class="item-title">我的足迹</view>
             <view class="arrow">历史记录浏览<view class="iconfont icon-you"></view></view>
         </view>
-        <view class="item">
+        <view class="item" bindtap="goAddressList">
             <view class="item-title">地址管理</view>
             <view class="arrow"><view class="iconfont icon-you"></view></view>
         </view>

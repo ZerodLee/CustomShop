@@ -8,22 +8,21 @@
             <view class="edit-bar">
                 <view class="edit-item">编辑</view>
             </view>
-            <view class="pro-item">
-                <checkbox-group class="shrink-0" bindchange="checkboxChange">
+            <view class="pro-item" wx:for="{{cartList}}" wx:key>
+                <checkbox-group class="shrink-0" data-item="{{item}}" bindchange="checkboxChange">
                 <label class="check-btn">
-                    <checkbox hidden value="{{allCheck}}" checked="{{allCheck}}"></checkbox>
-                    <view class="middle-text check-icon"><icon type="success" size="19" color="#f32f52" style="opacity:{{allCheck ? 1: 0}}"/></view>
+                    <checkbox hidden value="{{item.id}}" checked="{{item.checked}}"></checkbox>
+                    <view class="middle-text check-icon"><icon type="success" size="19" color="#f32f52" style="opacity:{{item.checked ? 1: 0}}"/></view>
                 </label>
                 </checkbox-group>
-                <view class="pro-img shrink-0"><image class="full-w full-h" src="/asset/img/pro.png" mode="widthFix" /></view>
+                <view class="pro-img shrink-0"><image class="full-w full-h" src="{{item.proInfo.photo.url}}" mode="widthFix" /></view>
                 <view class="pro-info">
-                    <view class="pro-title text-overflow-2">商品名字的名字名字商品名字的名字名字商品名字的名字名字商品名字的名字名字</view>
-                    <view class="pro-prop text-overflow">鞋子 ✍🏻 1.55kg brown</view>
+                    <view class="pro-title text-overflow-2">{{item.proInfo.title}}</view>
+                    <view class="pro-prop text-overflow">{{item.attrid1_name}}</view>
                     <view class="amount">
-                        <view class="price main-color">￥125.00</view>
+                        <view class="price main-color">￥{{item.proInfo.price}}</view>
                         <view class="number">
-                            <view >x1</view>
-
+                            <view >x{{item.num}}</view>
                         </view>
                     </view>
                 </view>
@@ -33,7 +32,7 @@
     </view>
     <view class="checkout-bar">
         <view class="all-check">
-            <checkbox-group bindchange="checkboxChange">
+            <checkbox-group bindchange="allCheckChange">
               <label>
                 <checkbox hidden value="{{allCheck}}" checked="{{allCheck}}"></checkbox>
                 <view class="middle-text check-icon"><icon type="success" size="19" color="#f32f52" style="opacity:{{allCheck ? 1: 0}}"/></view>
@@ -42,8 +41,8 @@
             </checkbox-group>
         </view>
         <view class="summary">
-            <view class="amount">合计：<text class="main-color">0.00</text></view>
-            <view class="btn-buy">结算</view>
+            <view class="amount">合计：<text class="main-color">{{cartInfo.allPrice}}</text></view>
+            <view class="btn-buy" bindtap="settleAccounts">结算</view>
         </view>
     </view>
 </view>

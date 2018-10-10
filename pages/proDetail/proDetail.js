@@ -19,12 +19,14 @@ Page({
     duration: 500,
     proImg:[{photo:'/asset/img/pro.png'}],
     detail:{},
+    product:{},
     swiperHeight:500,
     detailIndex:0,
 
-    selected:{attrid1:0,num:0,pid:0,tmpid:url.tmpid,uid:0},
+    selected:null,
+    //提交参数
+    selectedObj:null,
 
-    cartNumber:0,
     showSpec:false,
   },
 
@@ -40,7 +42,9 @@ Page({
       if(res.data.returnCode == '200'){
         res.data.data2.detail.contentmob = res.data.data2.detail.contentmob.replace(/\<img/gi,'<img style="max-width:100%;height:auto" class="rich-img" ' );
         that.setData({
-          detail:res.data.data2.detail
+          detail:res.data.data2.detail,
+          product:res.data.data2,
+          selectedObj:{attrid1:0,num:1,pid:+proid,tmpid:url.tmpid,uid:app.globalData.user.id}
         })
         wx.setNavigationBarTitle({
           title: res.data.data2.detail.title
@@ -102,9 +106,133 @@ Page({
     }
     
   },
-  addCart(e){
+  //选规格
+  chooseSpec(e){
+    let item = e.currentTarget.dataset.item
+    console.log(item)
+    let newSpecs = this.data.product.allsize.map(v=> {
+      if(v.attrid1 == item.attrid1){
+        v.selected = true
+      }else{
+        v.selected = false
+      }
+      return v
+    })
     this.setData({
-      showSpec:!this.data.showSpec
+      selected:item,
+      'selectedObj.attrid1':+item.attrid1,
+      'product.allsize':newSpecs
+    })
+  },
+  //加减数量
+  changeCount(e){
+    let state = e.currentTarget.dataset.state
+    let num = this.data.selectedObj.num
+    num = (state == 'add')?(num+1):(num-1)
+    if(num == 0){
+      util.toast('数量不得小于1','none')
+      return
+    }else{
+      this.setData({
+        'selectedObj.num':num
+      })
+    }
+  },
+  //加入购物车
+  addCart(e){
+    let that = this
+    let params = this.data.selectedObj
+    console.log(params)
+    if(params && params.attrid1){}else{
+      if(this.data.showSpec){
+        util.toast('请选择规格！','none')
+        return false
+      }else{
+        this.switchSpec(true)
+      }
+    }
+    util.showLoading()
+    http.tokenPostRequest(url.addCart,params,app.globalData.user.token).then(res =>{
+      console.log(res)
+      if(res.data.returnCode == '200'){
+        util.toast(res.data.msg)
+
+        wx.setStorageSync('cart',{changed:true})
+        that.setData({
+          'product.shopcart_number': that.data.product.shopcart_number + params.num
+        })
+      }
+    }).catch(res =>{
+      util.openAlert(res)
+    }).finally(() => {
+      util.hideLoading()
+    })
+  },
+  //立即购买
+  justBuy(e){
+    let that = this
+    let params = this.data.selectedObj
+    console.log(params)
+    if(params && params.attrid1){
+      util.showLoading()
+      http.postRequest(url.justBuy,params).then(res =>{
+        console.log(res)
+        if(res.data.returnCode == '200'){
+          // util.toast(res.data.msg,'none')
+          wx.navigateTo({
+            url: '../checkout/checkout?params=' + JSON.stringify(res.data.data2)
+          })
+        }else{
+          throw res.data.msg
+        }
+      }).catch(res =>{
+        util.openAlert(res)
+      }).finally(() => {
+        util.hideLoading()
+      })
+      
+    }else{
+      if(this.data.showSpec){
+        util.toast('请选择规格！','none')
+        return false
+      }else{
+        this.switchSpec(true)
+      }
+    }
+  },
+  //打开关闭规格选项
+  switchSpec(state){
+    let show = state == undefined?!this.data.showSpec:state
+    this.setData({
+      showSpec:show
+    })
+  },
+  closeSpec(){
+    this.switchSpec(false)
+  },
+  //收藏
+  collect(e){
+    let that = this
+    let params = this.data.selectedObj
+    util.showLoading()
+    http.tokenPostRequest(url.collection,{proid:params.pid,uid:params.uid},app.globalData.user.token).then(res =>{
+      console.log(res)
+      if(res.data.returnCode == '200'){
+        util.toast(res.data.msg)
+        that.setData({
+          'product.is_collection': (res.data.data2?1:0)
+        })
+      }
+    }).catch(res =>{
+      util.openAlert(res)
+    }).finally(() => {
+      util.hideLoading()
+    })
+  },
+  //去购物车
+  goCart(e){
+    wx.switchTab({
+      url: '../cart/cart'
     })
   },
   /**

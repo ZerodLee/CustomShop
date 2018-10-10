@@ -4,20 +4,20 @@
         <view class="address-item" wx:for="{{addressList}}" wx:key>
             <view class="address-info button-effect" data-item="{{item}}" bindtap="chooseAddress">
                 <view class="consignee">
-                    <view class="name">联系人：{{item.name}}</view>
-                    <view class="telephone">{{item.phone}}</view>
+                    <view class="name">联系人：{{item.username}}</view>
+                    <view class="telephone">{{item.tel}}</view>
                 </view>
-                <view class="address-detail">{{item.address}}</view>
+                <view class="address-detail">{{item.province_name + item.city_name + ' ' + item.addr}}</view>
             </view>
             <view class="edit-bar">
                 <view>
                     <label class="radio">
-                        <radio value="{{item.id}}" color="#f32f52" checked="{{item.checked}}"/>默认地址
+                        <radio value="{{item.id}}" color="#f32f52" checked="{{item.is_default == 1}}"/>默认地址
                     </label>
                 </view>
                 <view class="tools">
-                    <view class="mr-2"><text class="iconfont icon-bianji mr-1"></text>编辑</view>
-                    <view class="mr-2"><text class="iconfont icon-shanchu mr-1"></text>删除</view>
+                    <view class="mr-2" data-item="{{item}}" bindtap="editAdd"><text class="iconfont icon-bianji mr-1"></text>编辑</view>
+                    <view class="mr-2" data-id="{{item.id}}" bindtap="deleteAdd"><text class="iconfont icon-shanchu mr-1"></text>删除</view>
                 </view>
             </view>
         </view>

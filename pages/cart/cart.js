@@ -14,6 +14,7 @@ Page({
     allCheck:false,
     cartList:[],
     count:0,
+    cartInfo:{allPrice:'0.00',shopids:[]},
   },
 
   /**
@@ -26,13 +27,14 @@ Page({
     let that = this
     util.showLoading()
     //var files = res.tempFilePaths
-    http.postRequest(url.getCart,{uid:app.globalData.user.id,limit:100,page:1,tmpid:url.tmpid}).then(res =>{
+    http.tokenPostRequest(url.getCart,{uid:app.globalData.user.id,limit:100,page:1,tmpid:url.tmpid},app.globalData.user.token).then(res =>{
       console.log('getCart',res)
       if(res.data.returnCode == '200'){
         that.setData({
           cartList:res.data.data2.list,
           count:res.data.data2.count
         })
+        wx.setStorageSync('cart',{changed:false})
       }
     }).catch(res =>{
       util.openAlert(res)
@@ -42,8 +44,68 @@ Page({
   },
   checkboxChange(e){
     console.log(e)
+    let item = e.currentTarget.dataset.item
+    let listIndex
+    this.data.cartList.forEach((v,idx) => {
+      if(v.id == item.id){
+        listIndex = idx
+        return false
+      }
+    })
+    let listItem = 'cartList['+listIndex+'].checked'
     this.setData({
-      allCheck:!this.data.allCheck
+      [listItem]:!this.data.cartList[listIndex].checked
+    })
+    this.getCount()
+  },
+  allCheckChange(e){
+    console.log(e)
+    let allCheck = e.detail.value.length>0?true:false
+    let newList = this.data.cartList.map((v,idx) => {
+      v.checked = allCheck
+      return v
+    })
+    this.setData({
+      cartList:newList,
+      allCheck:allCheck
+    })
+    this.getCount()
+  },
+  getCount(){
+    let allPrice = 0
+    let shopids = []
+    this.data.cartList.forEach((v,idx) => {
+      if(v.checked){
+        allPrice += parseInt(v.proInfo.price)*parseInt(v.num)
+        shopids.push(+v.id)
+      }
+    })
+    console.log(allPrice.toFixed(2),shopids)
+    this.setData({
+      cartInfo:{allPrice:allPrice.toFixed(2),shopids:shopids},
+    })
+  },
+  settleAccounts(){
+    if(this.data.cartInfo.shopids.length == 0){
+      util.toast('请选择需要下单的商品！','none')
+      return false
+    }
+    let that = this
+    util.showLoading()
+    http.postRequest(url.comfirmBuy,{uid:app.globalData.user.id,shopids:that.data.cartInfo.shopids}).then(res =>{
+      console.log('comfirmBuy',res)
+      if(res.data.returnCode == '200'){
+        // util.toast(res.data.msg,'none')
+        wx.navigateTo({
+          url: '../checkout/checkout?params=' + JSON.stringify(res.data.data2)
+        })
+      }else{
+        throw res.data.msg
+      }
+    }).catch(res =>{
+      util.openAlert(res)
+    }).finally(() => {
+      util.hideLoading()
     })
   },
 
@@ -58,7 +120,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    let cartChacnge = wx.getStorageSync('cart')
+    if(cartChacnge && cartChacnge.changed){
+      this.loadCart()
+    }
+    
   },
 
   /**
