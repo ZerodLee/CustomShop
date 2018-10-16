@@ -68,6 +68,7 @@
 }
 .edit-bar .edit-item{
     padding: 5px 10px;
+    margin-left: 10px;
 }
 .cart-list .pro-item{
     display: flex;
@@ -78,7 +79,9 @@
     flex-shrink: 0;
 }
 .pro-item .pro-info{
-    flex-grow: 1;
+    /* flex-grow: 1; */
+    width: calc(100% - 30vw - 21px);
+    flex-grow: 0;
     height: 22vw;
     padding-left: 10px;
     display: flex;
@@ -99,9 +102,28 @@
     font-size: 12px;
     color: #bbb;
     margin-top: 5px;
+    height: 19px;
 }
 .pro-info .amount{
     margin-top: auto;
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
+}
+.amount .edit-number{
+    display: flex;
+    border: 1px solid #eee;
+    text-align: center;
+}
+.edit-number .edit-btn{
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+}
+.edit-number .edit-num{
+    width: 40px;
+    height: 18px;
+    line-height: 18px;
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
 }

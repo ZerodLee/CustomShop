@@ -13,7 +13,7 @@ Page({
    */
   data: {
     proList:[],
-    page:{limit:10,page:1,order:0},
+    page:{limit:10,page:1,order:0,count:0},
     ctype:null,
     filterItems:[
       {order:0,name:'综合排序',selected:true},
@@ -25,7 +25,9 @@ Page({
     
     showFilter:false,
     showHighLevel:false,
-    highLevelItems:{filter:[],hprice:'',lprice:'',selected:false}
+    highLevelItems:{filter:[],hprice:'',lprice:'',selected:false},
+
+    requestParam:{},
   },
 
   /**
@@ -47,6 +49,9 @@ Page({
       })
     }
     let params = {ctype:id,limit:that.data.page.limit,order:that.data.order,page:that.data.page.page}
+    this.setData({
+      requestParam:params
+    })
     that.loadList(params)
   },
   orderType(e){
@@ -65,7 +70,8 @@ Page({
     this.setData({
       filterItems:filterItems,
       selectFilterItem:selectFilterItem.name,
-      'page.order':order
+      'page.order':order,
+      requestParam:params
     })
     this.loadList(params,that.filterPanel)
   },
@@ -77,10 +83,11 @@ Page({
   firstSales(e){
     let that = this
     let params = {ctype:that.data.ctype,limit:that.data.page.limit,order:4,page:that.data.page.page}
-    this.loadList(params,that.closeFilter)
     this.setData({
-      'page.order':4
+      'page.order':4,
+      requestParam:params
     })
+    this.loadList(params,that.closeFilter)
   },
   highLevelFilter(e,state){
     let that = this
@@ -131,7 +138,29 @@ Page({
       console.log(res)
       if(res.data.returnCode == '200'){
         that.setData({
-          proList:res.data.data2.list
+          proList:res.data.data2.list,
+          'page.count': res.data.data2.count
+        })
+      }
+    }).catch(res =>{
+      console.log(res)
+      util.openAlert(res)
+    }).finally(() => {
+      util.hideLoading()
+      if(callback){
+        callback()
+      }
+    })
+  },
+  loadMore(params,callback){
+    let that = this
+    util.showLoading()
+    http.postRequest(url.getProList,params).then(res =>{
+      console.log(res)
+      if(res.data.returnCode == '200'){
+        that.setData({
+          proList:[...that.data.proList,...res.data.data2.list],
+          'page.count': res.data.data2.count
         })
       }
     }).catch(res =>{
@@ -158,13 +187,17 @@ Page({
     let cates = this.data.highLevelItems.filter.filter(v => v.selected)
     let cateId = cates.length>0?(cates[0]['id']):null
     let params = {
-      ctype:this.data.ctype,cate_id:cateId,
+      ctype:this.data.ctype,
+      cate_id:cateId,
       lprice:this.data.highLevelItems.lprice,
       hprice:this.data.highLevelItems.hprice,
-      order:this.data.page.order,limit:this.data.page.limit,page:this.data.page.page
+      order:this.data.page.order,
+      limit:this.data.page.limit,
+      page:this.data.page.page
     }
     this.setData({
-      'highLevelItems.selected':true
+      'highLevelItems.selected':true,
+      requestParam:params
     })
     this.loadList(params,this.closeFilter)
   },
@@ -221,7 +254,17 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    console.log('bottom')
+    let that = this
+    let params = that.data.requestParam
+    if(that.data.page.count > that.data.proList.length && that.data.page.count > 10){
+      params.page = params.page + 1
+      that.loadMore(params,function(){
+        that.setData({
+          requestParam:params
+        })
+      })
+    }
   },
 
   /**

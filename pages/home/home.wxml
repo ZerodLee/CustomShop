@@ -84,17 +84,17 @@
                 </view>
             </view>
         </view>
-        <view class="product-banner ad-banner" wx:if="{{listAds[3]}}" bindtap="goAds" data-ad="{{listAds[3]}}">
-            <image class="full-w" src="{{listAds[3].photo}}" mode="widthFix" />
+        <view class="product-banner ad-banner" wx:if="{{lastAds.length>0}}">
+            <image wx:for="{{lastAds}}" wx:key class="full-w" src="{{item.photo}}" bindtap="goAds" data-ad="{{item}}" mode="widthFix" />
         </view>
     </view>
     <!--hotHouse-->
     <view class="display-box">
-        <view class="product-banner">
+        <view class="product-banner" bindtap="hotHouseList">
             <image class="full-w" src="{{categoryBanner.hotHouse}}" mode="widthFix" />
         </view>
         <view class="product-box">
-            <view class="full-w hotHouse" data-id="{{item.id}}" bindtap="goDetail" wx:for="{{homeProList.hotHouse}}" wx:key>
+            <view class="full-w hotHouse" data-id="{{item.id}}" bindtap="goHotHouse" wx:for="{{homeProList.hotHouse}}" wx:key>
                 <view class="product-img"><image class="full-img" src="{{item.photo}}" mode="widthFix" /></view>
                 <view class="title">{{item.title}}</view>
             </view>

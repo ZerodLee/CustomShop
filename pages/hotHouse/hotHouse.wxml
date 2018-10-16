@@ -1,0 +1,35 @@
+<!--pages/hotHouse/hotHouse.wxml-->
+<view class="page">
+    <view class="tab-bar">
+        <view class="tab-item {{showtype == 3?'active':''}}" data-type="{{3}}" bindtap="switchType">现房抢购</view>
+        <view class="tab-item {{showtype == 4?'active':''}}" data-type="{{4}}" bindtap="switchType">期房预定</view>
+        <view class="tab-item {{showtype == 5?'active':''}}" data-type="{{5}}" bindtap="switchType">商铺推荐</view>
+    </view>
+    <view class="art-list mt-2" wx:if="{{showtype == 3}}">
+        <view class="art-item" wx:for="{{hotHouse.spot}}" wx:key>
+            <view class="item-img" bindtap="goArticle" data-id="{{item.id}}"><image class="full-w" src="{{item.thumb}}" mode="widthFix" /></view>
+            <view class="item-name btns">
+                <view>{{item.title}}</view>
+                <view class="btn-outline red" bindtap="goReserve" data-name="{{item.title}}" data-id="{{item.id}}">我要预定</view>
+            </view>
+        </view>
+    </view>
+    <view class="art-list mt-2" wx:if="{{showtype == 4}}">
+        <view class="art-item" wx:for="{{hotHouse.futures}}" wx:key>
+            <view class="item-img" bindtap="goArticle" data-id="{{item.id}}"><image class="full-w" src="{{item.thumb}}" mode="widthFix" /></view>
+            <view class="item-name btns">
+                <view>{{item.title}}</view>
+                <view class="btn-outline red" bindtap="goReserve" data-name="{{item.title}}" data-id="{{item.id}}">我要预定</view>
+            </view>
+        </view>
+    </view>
+    <view class="art-list mt-2" wx:if="{{showtype == 5}}">
+        <view class="art-item" wx:for="{{hotHouse.stores}}" wx:key>
+            <view class="item-img" bindtap="goArticle" data-id="{{item.id}}"><image class="full-w" src="{{item.thumb}}" mode="widthFix" /></view>
+            <view class="item-name btns">
+                <view>{{item.title}}</view>
+                <view class="btn-outline red" bindtap="goReserve" data-name="{{item.title}}" data-id="{{item.id}}">我要预定</view>
+            </view>
+        </view>
+    </view>
+</view>

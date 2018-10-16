@@ -65,6 +65,7 @@ swiper{
     padding: 15px;
     min-height:50vw;
     flex-wrap: wrap;
+    background-color: #fff;
 }
 .category-box .category-item{
     flex-shrink: 0;
@@ -85,19 +86,19 @@ swiper{
 
 .product-box{
     flex-wrap: wrap;
-    border-top: 1.6vw solid #f1f1f1;
+    border-top: 1.6vw solid #f0f0f0;
     background-color: #fff;
 }
 .product-item{
     width: 49.2vw;
-    border-bottom: 1.6vw solid #f1f1f1;
+    border-bottom: 1.6vw solid #f0f0f0;
     padding: 5px 0;
 }
 .product-item:nth-of-type(odd){
-    border-right: 1.6vw solid #f1f1f1;
+    border-right: 1.6vw solid #f0f0f0;
 }
 .ad-banner{
-    background-color: #f1f1f1;
+    background-color: #f0f0f0;
     padding: 0 8px 10px 8px;
     
 }
@@ -115,7 +116,7 @@ swiper{
 }
 .time-number{
     display: inline-block;
-    margin: 0 5px;
+    margin: 0 3px;
     background-color: #333233;
     color: #fff;
     font-size: 14px;
@@ -153,7 +154,7 @@ swiper{
     text-decoration:line-through;
 }
 .bottom-tip{
-    background-color: #f1f1f1;
+    background-color: #f0f0f0;
     display: flex;
     justify-content: center;
     align-items: center;

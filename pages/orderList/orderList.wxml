@@ -7,40 +7,50 @@
         <view class="tab button-effect {{listIndex == switchItems.toSigning?'active':''}}" data-index="{{switchItems.toSigning}}" bindtap="switchTab">待收货</view>
         <view class="tab button-effect {{listIndex == switchItems.toComment?'active':''}}" data-index="{{switchItems.toComment}}" bindtap="switchTab">待评价</view>
     </view>
-    <view class="list-wrap mt-2">
+    <view class="list-wrap">
         <swiper duration="300" current="{{listIndex}}" bindchange="swiperChange">
-            <block wx:for="{{orderList}}" wx:key wx:for-index="idx" wx:for-item="order">
+            <block wx:for="{{orderList}}" wx:key wx:for-index="idx" wx:for-item="catrgoryOrder">
                 <swiper-item>
-                    <view class="order-list">
-                        <view class="order-item">
+                    <view class="order-list" wx:if="{{catrgoryOrder.list.length != 0}}">
+                        <view class="order-item" wx:for="{{catrgoryOrder.list}}" wx:key wx:for-item="order" data-item="{{order}}" bindtap="goDetail">
                             <view class="order-state p-2">
                                 <view class="iconfont icon-shijian secondary-color"></view>
-                                <view class="time secondary-color">2015-05-05 15:12 {{idx}}</view>
-                                <view class="main-color ml-auto">交易关闭</view>
+                                <view class="time secondary-color">{{order.time}}</view>
+                                <view class="main-color ml-auto">{{order.state}}</view>
                             </view>
                             <view class="cart-list">
-                                <view class="pro-item">
-                                    <view class="pro-img shrink-0"><image class="full-w full-h" src="/asset/img/pro.png" mode="widthFix" /></view>
+                                <view class="pro-item" wx:for="{{order.pros}}" wx:key>
+                                    <view class="pro-img shrink-0"><image class="full-w full-h" src="{{item.photo}}" mode="widthFix" /></view>
                                     <view class="pro-info">
-                                        <view class="pro-title text-overflow-2">商品名字的名字名字商品名字的名字名字商品名字的名字名字商品名字的名字名字</view>
-                                        <view class="pro-prop text-overflow">鞋子 ✍🏻 1.55kg brown</view>
+                                        <view class="pro-title text-overflow-2">{{item.title}}</view>
+                                        <view class="pro-prop text-overflow">{{item.attr1_title + ' ' + item.attr2_title}}</view>
                                         <view class="amount">
-                                            <view class="price main-color">￥125.00</view>
+                                            <view class="price main-color">￥{{item.price}}</view>
                                             <view class="number">
-                                                <view >x1</view>
+                                                <view >x{{item.pro_num}}</view>
                                             </view>
                                         </view>
                                     </view>
                                 </view>
                             </view>
                             <view class="order-info">
-                                共1件商品，合计<text class="t-16">￥125.00</text>（含运费0.00元）
+                                共{{order.pros.length}}件商品，合计<text class="t-16">￥{{order.pay_amount}}</text>（含运费{{order.pro_freight}}元）
                             </view>
                             <view class="btns">
-                                <view class="btn-outline button-effect">取消订单</view>
-                                <view class="btn-outline red button-effect">删除订单</view>
+                                <view class="btn-outline button-effect" wx:if="{{order.status == 1}}" data-tab="{{idx}}" data-id="{{order.id}}" catchtap="cancelOrder">取消订单</view>
+                                <view class="btn-outline button-effect" wx:if="{{order.status == 2}}" data-tab="{{idx}}" data-id="{{order.id}}" catchtap="remindOrder">提醒发货</view>
+                                <view class="btn-outline button-effect" wx:if="{{order.status == 3 || order.status == 4}}" data-tab="{{idx}}" data-orderno="{{order.order_no}}" data-id="{{order.id}}" catchtap="seeWuliu">查看物流</view>
+                                <view class="btn-outline red button-effect" wx:if="{{order.status == 3}}" data-tab="{{idx}}" data-id="{{order.id}}" catchtap="confrimOrder">确认收货</view>
+                                <view class="btn-outline red button-effect" wx:if="{{order.status == 4}}" data-tab="{{idx}}" data-id="{{order.id}}" catchtap="goComment">评价</view>
+                                <view class="btn-outline red button-effect" wx:if="{{order.status == 6}}" data-tab="{{idx}}" data-id="{{order.id}}" catchtap="deleteOrder">删除订单</view>
+                                <view class="btn-outline red button-effect" wx:if="{{order.status == 1}}" data-tab="{{idx}}" data-id="{{order.id}}" catchtap="justPay">立即付款</view>
                             </view>
                         </view>
+                        <view class="load-more button-effect p-2 text-center" wx:if="{{!catrgoryOrder.isOver && catrgoryOrder.count > 10}}" data-index="{{idx}}" bindtap="loadMore">加载更多</view>
+                    </view>
+                    <view class="order-empty" wx:else>
+                        <view class="empty-img"><image class="full-w" src="/asset/img/order-empty.png" mode="widthFix" /></view>
+                        <view class="mt-2 t-16">暂无订单，快去下单吧</view>
                     </view>
                 </swiper-item>
             </block>

@@ -1,0 +1,41 @@
+/* pages/hotHouse/hotHouse.wxss */
+.art-list{
+
+}
+.art-list .art-item{
+    border-top: 1px solid #dfdfdf;
+    background-color: #fff;
+    transition: background-color 0.2s;
+}
+.art-list .art-item:active{
+    background-color: #eee;
+}
+.art-list .item-name{
+    padding: 10px;
+    font-size: 14px;
+}
+
+.tab-bar{
+    padding: 10px 20px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+}
+.tab-item{
+    padding: 5px 20px;
+    background-color: #eee;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-right: 10px;
+}
+.tab-item.active{
+    background-color: #f32f52;
+    color: #fff;
+}
+.item-name{
+    box-sizing: border-box;
+    height:60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

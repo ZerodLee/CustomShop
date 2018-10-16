@@ -21,7 +21,7 @@ Page({
   onLoad: function (options) {
     console.log(options)
     let url = options.url
-    let params = JSON.parse(options.params)
+    let params = options.params?JSON.parse(options.params):''
     if(url){
       // wx.setNavigationBarTitle({
       //   title: item[0].title

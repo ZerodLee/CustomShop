@@ -139,8 +139,8 @@
 } */
 .pro-item .img{
     flex-shrink: 0;
-    width: 22vw;
-    height: 22vw;
+    width: 23vw;
+    height: 23vw;
     overflow: hidden;
     font-size: 0;
     margin-right: 10px;
@@ -157,7 +157,20 @@
     color: #bbb;
 }
 .pro-info .price{
-    font-size: 18px;
+    font-size: 16px;
     margin-top: auto;
     color: #f32f52;
 }
+.pro-info .pro-title{
+    height: auto;
+    flex-shrink: 0;
+}
+@media (min-width: 380px) {
+    /* 仅在 480px 或更宽的屏幕生效的样式规则 */
+    .pro-info .price{
+        font-size: 18px;
+    }
+    .pro-info .pro-title{
+        height: auto;
+    }
+  }

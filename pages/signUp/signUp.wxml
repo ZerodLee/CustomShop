@@ -31,14 +31,14 @@
                 </picker>
             </view>
         </view>
-        <view class="weui-cell weui-cell_select button-effect">
+        <!-- <view class="weui-cell weui-cell_select button-effect">
             <view class="weui-cell__hd weui-cell__hd_in-select-after">
                 <view class="weui-label">绑定手机</view>
             </view>
             <view class="weui-cell__bd weui-select" bindtap="bindPhone" >
                 
             </view>
-        </view>
+        </view> -->
     </view>
     <!-- <view class="btns">
         <button class="login-btn full-button" bindtap="comfirm">完 成 注 册</button>

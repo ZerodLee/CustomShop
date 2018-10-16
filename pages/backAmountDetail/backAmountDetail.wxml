@@ -1,0 +1,59 @@
+<!--pages/backAmountDetail/backAmountDetail.wxml-->
+<view class='page'>
+    <view class="weui-cells weui-cells_after-title t-16">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label secondary-color">售后编号</view>
+            </view>
+            <view class="weui-cell__bd">
+                <view class="weui-input">{{order.title}}</view>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label secondary-color">售后状态</view>
+            </view>
+            <view class="weui-cell__bd">
+                <view class="weui-input" wx:if="{{order.is_cancel == '1'}}">已撤销</view>
+                <view class="weui-input" wx:else>{{order.orderzt > 5?'退款成功':returnState[order.orderzt]}}</view>
+            </view>
+        </view>
+        <view class="cart-list mt-2">
+            <view class="pro-item" >
+                <view class="pro-img shrink-0"><image class="full-w full-h" src="{{order.proinfo.photo.url}}" mode="widthFix" /></view>
+                <view class="pro-info">
+                    <view class="pro-title text-overflow-2">{{order.proinfo.title}}</view>
+                    <view class="pro-prop text-overflow">{{order.proinfo.attr1_title + ' ' + order.proinfo.attr2_title}}</view>
+                    <view class="amount">
+                        <view class="price main-color">￥{{order.proinfo.price}}</view>
+                        <view class="number btns">
+                            <view >x{{order.proinfo.pro_num}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label secondary-color"><text class="main-color">*</text>退款金额</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" type='number' value="{{order.mrefund}}" bindinput='bindMoney' placeholder="请输入退款金额" />
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label secondary-color"><text class="main-color">*</text>退款原因</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" type='text' value="{{order.content}}" bindinput='bindReason' placeholder="请输入原因" />
+            </view>
+        </view>
+    </view>
+    <view class="checkout-bar" wx:if="{{order.is_cancel == '0'}}">
+        <view class="full-w summary row">
+            <view class="col-6 btn" bindtap="modify_return">修改申请</view>
+            <view class="col-6 btn btn-buy" bindtap="back_apply">撤销申请</view>
+        </view>
+    </view>
+</view>

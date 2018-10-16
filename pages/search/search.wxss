@@ -1,4 +1,37 @@
 /* pages/search/search.wxss */
+.page{
+  background-color: #fff
+}
+.page__bd{
+  width: 100vw;
+  min-height: 100vh;
+  position: relative;
+}
+.hot-words{
+  padding: 5vw;
+}
+.hot-words .title{
+  color: #999;
+}
+.hot-words .words-list{
+  display: flex;
+  flex-wrap: wrap;
+}
+.words-list .words-item{
+  padding: 5px 10px;
+  border: 1px solid #eee;
+  font-size: 13px;
+  color: #f32f52;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+.searchbar-result{
+  position: absolute;
+  width: 100vw;
+  top: 48px;
+  background-color: #fff;
+}
+
 .weui-search-bar {
   position: relative;
   padding: 8px 10px;
@@ -75,6 +108,7 @@
 .searchbar-result{
     margin-top: 0;
     font-size: 14px;
+    box-shadow: 0px 2px 4px 0 #ccc;
 }
 .searchbar-result:before{
     display: none;

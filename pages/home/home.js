@@ -6,7 +6,7 @@ const util = require('../../utils/util.js')
 
 //const app = getApp()
 const http = new Http()
-const timeDown = new CountDown()
+var timers
 Page({
 
   /**
@@ -79,9 +79,17 @@ Page({
     }).then(res =>{
       console.log('limitTime',res)
       if(res.data.returnCode == '200'){
-        that.setData({
-          timeLimitData:res.data.data2
+        let limitTime = []
+        let timeLimitData = res.data.data2.map(v => {
+          limitTime.push(+v.endtime)
+          //v.limitTime = {hours:24,minutes:59,seconds:59}
+          return v
         })
+        that.setData({
+          timeLimitData:timeLimitData
+        })
+        //console.log(limitTime)
+        timers = that.startTimer(limitTime)
       }
       //开始加载所有首页商品
       //新品上架
@@ -178,8 +186,42 @@ Page({
       url: '../homeCategories/homeCategories?cate=' + e.currentTarget.dataset.cate + '&title=' + e.currentTarget.dataset.title
     })
   },
-  setTimer(){
+  goAds(e){
+    console.log(e.currentTarget.dataset.ad)
+    wx.navigateTo({
+      url: '../proDetail/proDetail?id=' + e.currentTarget.dataset.ad.pid
+    })
+  },
+  goHotHouse(e){
+    console.log(this.data.homeProList.hotHouse,e.currentTarget.dataset.id)
+    wx.navigateTo({
+      url: '../webview/webview?url=' + url.getStqnDetailUrl + '&params=' + JSON.stringify({id:e.currentTarget.dataset.id})
+    })
+  },
+  hotHouseList(e){
+    wx.navigateTo({
+      url: '../hotHouse/hotHouse'
+    })
+  },
+  startTimer(limitTimes){
+    let that = this
+    let timeDown = new CountDown(0,limitTimes)
 
+    let theTimer = setInterval(function(){
+      let limitTime = timeDown.manyCountDown()
+      //console.log(limitTime)
+      let newTimeLimitData = that.data.timeLimitData.map((item,idx) =>{
+        item.limitTime = limitTime[idx]
+        return item
+      })
+      that.setData({
+        timeLimitData:newTimeLimitData
+      })
+    },1000)
+    return theTimer
+  },
+  stopTimer(){
+    clearInterval(timers)
   },
   goSearch(){
     wx.navigateTo({
@@ -211,7 +253,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    this.stopTimer()
   },
 
   /**

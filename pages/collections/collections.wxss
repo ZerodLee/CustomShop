@@ -1,0 +1,80 @@
+/* pages/collections/collections.wxss */
+/* pages/proList/proList.wxss */
+.filter-bar{
+    padding: 10px 0;
+    border-bottom: 1px solid #dfdfdf;
+}
+.filter-bar .filter-item{
+    text-align: center;
+}
+.filter-item.active{
+    color: #f32f52;
+}
+.filter-bar .filter-item{
+    border-right: 1px solid #dfdfdf;
+}
+.filter-bar .filter-item:last-child{
+    border-right: 0;
+}
+.pro-list{
+
+}
+.pro-list .pro-item{
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #dfdfdf;
+    background-color: #fff;
+    transition: background-color 0.2s;
+}
+.pro-list .pro-item:active{
+    background-color: #eee;
+}
+/* .pro-list .pro-item:last-child{
+    border-bottom: 0;
+} */
+.pro-item .img{
+    flex-shrink: 0;
+    width: 22vw;
+    height: 22vw;
+    overflow: hidden;
+    font-size: 0;
+    margin-right: 10px;
+}
+.pro-item .pro-info{
+    height: 22vw;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.pro-info .sale-amount{
+    font-size: 12px;
+    margin-top: 5px;
+    color: #bbb;
+}
+.pro-info .price{
+    font-size: 16px;
+    margin-top: auto;
+    color: #f32f52;
+}
+.pro-info .pro-title{
+    height: auto;
+    flex-shrink: 0;
+}
+.pro-info .delete{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 9;
+}
+
+@media (min-width: 380px) {
+    /* 仅在 480px 或更宽的屏幕生效的样式规则 */
+    .pro-info .price{
+        font-size: 18px;
+    }
+    .pro-info .pro-title{
+        height: auto;
+    }
+  }

@@ -14,7 +14,8 @@ Page({
   data: {
     address:null,
     orderInfo:null,
-    orderParams:{attrid1:0,addrid:0,is_jf:0,num:0,pid:0,uid:0,buyer_remarks:''}
+    orderParams:{addrid:0,is_jf:0,uid:0,buyer_remarks:''},
+    lijigoumai:0
   },
 
   /**
@@ -29,10 +30,11 @@ Page({
       })
       return false
     }else{
-      params.price_all = params.price_all?params.price_all:params.price
+      params.price_all = params.price_all?params.price_all.toFixed(2):params.price.toFixed(2)
       that.setData({
         orderInfo: params,
-        address:params.addr_rs
+        address:params.addr_rs,
+        lijigoumai:options.lijigoumai
       })
     }
     // util.showLoading()
@@ -71,10 +73,11 @@ Page({
     let that = this
     let params = this.data.orderParams
     let product = this.data.orderInfo.shopdata[0]
+
+    let theUrl = ''
+
+
     params.addrid = +this.data.address.id
-    params.attrid1 = +product.attrid1
-    params.num = +product.num
-    params.pid = +product.pid
     params.uid = app.globalData.user.id
     params.buyer_remarks = encodeURIComponent(params.buyer_remarks)
 
@@ -85,12 +88,29 @@ Page({
       util.toast('请收货地址！','none')
       return false
     }
+    //立即购买逻辑
+    if(that.data.lijigoumai=="1"){
+      params.attrid1 = +product.attrid1
+      params.attrid2 = +product.attrid2
+      params.num = +product.num
+      params.pid = +product.pid
+
+      theUrl = url.submitOrderNow
+    }
+    //从购物车过来的购买逻辑！
+    else if(that.data.lijigoumai=="0"){
+      that.data.orderInfo.shopdata.forEach((v,idx) => {
+        params['shopids['+ idx +']'] = v.id
+      })
+      theUrl = url.submitOrder
+    }
     console.log(params)
     util.showLoading()
-    http.postRequest(url.submitOrderNow,params).then(res =>{
+    http.postRequest(theUrl,params).then(res =>{
       if(res.data.returnCode == '200'){
         let orderId = +aes.Decrypt(res.data.data)
         console.log(orderId)
+        wx.setStorageSync('cart',{changed:true})
         return http.postRequest(url.getPayParam,{id:orderId,type:2,uid:app.globalData.user.id,trade_type:'JSAPI'})
       }else{
         throw res.data.msg
@@ -101,19 +121,23 @@ Page({
         payParam = JSON.parse(payParam.match(/({.*})/)[1])
         console.log(payParam)
         wx.requestPayment({
-          'timeStamp': (payParam.timestamp+''),
-          'nonceStr': payParam.noncestr,
-          'package': 'prepay_id=' + payParam.prepayid,
+          'timeStamp': (payParam.timeStamp+''),
+          'nonceStr': payParam.nonceStr,
+          'package': payParam.package,
           'signType': 'MD5',
           'paySign': payParam.sign,
           'success': function (resp) {
             console.log('ok', resp)
-            
+            util.toast('支付成功！')
+            setTimeout(() => {
+              wx.redirectTo({
+                url: '../orderList/orderList'
+              })
+            }, 2000);
           },
           'fail': function (res) {
-             console.log(res)
-             
-             setTimeout(function () { util.toast('支付未完成','none') }, 500)
+              console.log(res)
+              setTimeout(function () { util.toast('支付未完成','none') }, 500)
           }
         })
       }else{
@@ -124,6 +148,8 @@ Page({
     }).finally(() => {
       util.hideLoading()
     })
+
+    
   },
 
   /**

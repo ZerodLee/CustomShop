@@ -1,7 +1,11 @@
 <!--pages/components/time-limit-product/time-limit-product.wxml-->
 <view class="time-limit-class product-box">
-    <view class="product-item" wx:for="{{productData}}" wx:key>
-        <view class="countdown">距结束 <text class="time-number">25</text>:<text class="time-number">25</text>:<text class="time-number">25</text></view>
+    <view class="product-item" wx:for="{{productData}}" wx:key data-item="{{item}}" bindtap="goLimitProDetail">
+        <view class="countdown">距结束 
+            <text class="time-number">{{item.limitTime.hours?item.limitTime.hours:24}}</text>:
+            <text class="time-number">{{item.limitTime.minutes?item.limitTime.minutes:24}}</text>:
+            <text class="time-number">{{item.limitTime.seconds?item.limitTime.seconds:24}}</text>
+        </view>
         <view class="product-img"><image class="full-img" src="{{item.photo}}" mode="widthFix" /></view>
         <view class="title">{{item.title}}</view>
         <view class="price-wrap">

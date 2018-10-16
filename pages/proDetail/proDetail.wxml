@@ -9,6 +9,13 @@
             </block>
         </swiper>
     </view>
+    <view class="limit-time" wx:if="{{detail.endtime}}">
+        <view class="text-center">距离结束还剩：
+            <text class="time-num">{{detail.limitTime.hours?detail.limitTime.hours:24}}</text>:
+            <text class="time-num">{{detail.limitTime.minutes?detail.limitTime.minutes:24}}</text>:
+            <text class="time-num">{{detail.limitTime.seconds?detail.limitTime.seconds:24}}</text>
+        </view>
+    </view>
     <view class="pro-info">
         <view class="pro-title text-overflow-2">{{detail.title}}</view>
         <view class="price-text">
@@ -39,22 +46,123 @@
             <view class="text">商品详情</view>
         </view>
         <view class="switch-btn {{detailIndex == 1?'active':''}}" data-index="1" bindtap="switchTab">
-            <view class="text">评价（2）</view>
+            <view class="text">评价（{{product.comment_all_number}}）</view>
         </view>
     </view>
     <view class="pro-detail">
-        <swiper duration="300" current="{{detailIndex}}" bindchange="swiperChange" style="height: {{swiperHeight}}px;">
-            <swiper-item>
-                <rich-text class="detail-content" nodes="{{detail.contentmob}}"></rich-text>
+        <view class="detail-content" wx:if="{{detailIndex == 0}}">
+            <import src="../../wxParse/wxParse.wxml"/>
+            <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+        </view>
+        <view class="" wx:if="{{detailIndex == 1}}">
+            <view class="issue">
+                    <view class="issue-cate">
+                        <view class="cate-item {{comments.showImage?'':'active'}}" data-image="{{false}}" bindtap="switchShowImage">全部评价 {{product.comment_all_number}}</view>
+                        <view class="cate-item {{comments.showImage?'active':''}}" data-image="{{true}}" bindtap="switchShowImage">有图 {{product.comment_img_number}}</view>
+                    </view>
+                    <view class="issue-list" wx:if="{{!comments.showImage}}">
+                        <view class="issue-item" wx:for="{{comments.all.list}}" wx:key >
+                            <view class="avatar">
+                                <image src="{{item.pic_head}}" mode="widthFix" class="full-w full-h" />
+                            </view>
+                            <view class="comment">
+                                <view class="mb-1">{{item.nickname}}</view>
+                                <view class="com-info mt-1">{{item.time}}  {{item.attrid1}}</view>
+                                <view class="com-detail">{{item.content}}</view>
+                            </view>
+                        </view>
+                        <view class="issue-item load-more" wx:if="{{comments.all.count > 10 && comments.all.count > comments.all.list.length}}" data-image="{{false}}" bindtap="loadMoreComments">点击加载更多..</view>
+                    </view>
+                    <view class="issue-list" wx:else>
+                        <view class="issue-item" wx:for="{{comments.images.list}}" wx:key >
+                            <view class="avatar">
+                                <image src="{{item.pic_head}}" mode="widthFix" class="full-w full-h" />
+                            </view>
+                            <view class="comment">
+                                <view class="mb-1">{{item.nickname}}</view>
+                                <view class="com-info mt-1">{{item.time}}  {{item.attrid1}}</view>
+                                <view class="com-detail">{{item.content}}</view>
+                                <view class="com-images">
+                                    <view class="weui-uploader">
+                                        <view class="weui-uploader__bd">
+                                        <view class="weui-uploader__files" id="uploaderFiles">
+                                            <block wx:for-items="{{item.photo}}" wx:key="{{index}}">
+                                            <view class="weui-uploader__file" bindtap='previewImage' bindlongpress="deleteImage" data-url="{{item}}" data-index="{{index}}">
+                                                <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                                            </view>
+                                            </block>
+                                        </view>
+                                    </view>
+                                </view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="issue-item load-more" wx:if="{{comments.images.count > 10 && comments.images.count > comments.images.list.length}}" data-image="{{true}}" bindtap="loadMoreComments">点击加载更多..</view>
+                    </view>
+                </view>
+        </view>
+        <!-- <swiper duration="300" current="{{detailIndex}}" bindchange="swiperChange" style="height: {{swiperHeight}}px;">
+            <swiper-item class="detail-content">
+                <import src="../../wxParse/wxParse.wxml"/>
+                <template is="wxParse" data="{{wxParseData:article.nodes}}" />
             </swiper-item>
-            <swiper-item>
-                <view class="issue"></view>
-                <!-- <image src="{{item}}" mode="widthFix" class="slide-image"/> -->
+            <swiper-item style="height:auto">
+                <view class="issue">
+                    <view class="issue-cate">
+                        <view class="cate-item {{comments.showImage?'':'active'}}" data-image="{{false}}" bindtap="switchShowImage">全部评价 {{product.comment_all_number}}</view>
+                        <view class="cate-item {{comments.showImage?'active':''}}" data-image="{{true}}" bindtap="switchShowImage">有图 {{product.comment_img_number}}</view>
+                    </view>
+                    <view class="issue-list" wx:if="{{!comments.showImage}}">
+                        <view class="issue-item" wx:for="{{comments.all.list}}" wx:key >
+                            <view class="avatar">
+                                <image src="{{item.pic_head}}" mode="widthFix" class="full-w full-h" />
+                            </view>
+                            <view class="comment">
+                                <view class="mb-1">{{item.nickname}}</view>
+                                <view class="com-info mt-1">{{item.time}}  {{item.attrid1}}</view>
+                                <view class="com-detail">{{item.content}}</view>
+                            </view>
+                        </view>
+                        <view class="issue-item load-more" wx:if="{{comments.all.count > 10 && comments.all.count > comments.all.list.length}}" data-image="{{false}}" bindtap="loadMoreComments">点击加载更多..</view>
+                    </view>
+                    <view class="issue-list" wx:else>
+                        <view class="issue-item" wx:for="{{comments.images.list}}" wx:key >
+                            <view class="avatar">
+                                <image src="{{item.pic_head}}" mode="widthFix" class="full-w full-h" />
+                            </view>
+                            <view class="comment">
+                                <view class="mb-1">{{item.nickname}}</view>
+                                <view class="com-info mt-1">{{item.time}}  {{item.attrid1}}</view>
+                                <view class="com-detail">{{item.content}}</view>
+                                <view class="com-images">
+                                    <view class="weui-uploader">
+                                        <view class="weui-uploader__bd">
+                                        <view class="weui-uploader__files" id="uploaderFiles">
+                                            <block wx:for-items="{{item.photo}}" wx:key="{{index}}">
+                                            <view class="weui-uploader__file" bindtap='previewImage' bindlongpress="deleteImage" data-url="{{item}}" data-index="{{index}}">
+                                                <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                                            </view>
+                                            </block>
+                                        </view>
+                                    </view>
+                                </view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="issue-item load-more" wx:if="{{comments.images.count > 10 && comments.images.count > comments.images.list.length}}" data-image="{{true}}" bindtap="loadMoreComments">点击加载更多..</view>
+                    </view>
+                </view>
             </swiper-item>
-        </swiper>
+        </swiper> -->
     </view>
     <view class="btns-bar">
         <view class="left row">
+            <!-- <view class="left-btn collect-btn" bindtap="goto_kefu">
+                <view>
+                    <view class="iconfont icon-kefu "></view>                    
+                </view>
+                <view class="">客服</view>
+            </view> -->
             <view class="left-btn collect-btn" bindtap="collect">
                 <view>
                     <view wx:if="{{product.is_collection}}" class="iconfont icon-shoucang2 main-color"></view>
@@ -67,7 +175,7 @@
                     <view class="iconfont icon-gouwuche"></view>
                 </view>
                 <view class="">购物车</view>
-                <view class="badge" wx:if="{{product.shopcart_number}}">{{product.shopcart_number}}</view>
+                <!-- <view class="badge" wx:if="{{product.shopcart_number}}">{{product.shopcart_number}}</view> -->
             </view>
         </view>
         <view class="right row">
@@ -84,11 +192,13 @@
             </view>
         </view>
         <view class="specs-wrap">
-            <view class="title">规格</view>
-            <view class="specs">
-                <view class="spec-item {{item.selected?'active':''}}" wx:for="{{product.allsize}}" wx:key data-item="{{item}}" bindtap="chooseSpec">{{item.attr1name}}</view>
-               
+            <view class="mb-1" wx:for="{{product.attr}}" wx:key wx:for-item="attr" wx:for-index="idx">
+                <view class="title">{{attr.title}}</view>
+                <view class="specs">
+                    <view class="spec-item {{item.selected?'active':''}}" wx:for="{{attr.er}}" wx:key data-index="{{idx}}" data-item="{{item}}" bindtap="chooseSpec">{{item.title}}</view>
+                </view>
             </view>
+            
         </view>
         <view class="count">
             <view class="title">购买数量</view>

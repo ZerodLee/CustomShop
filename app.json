@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/search/search",
+    "pages/orderDetail/orderDetail",
     "pages/orderList/orderList",
     "pages/addAddress/addAddress",
     "pages/checkout/checkout",
@@ -17,7 +19,13 @@
     "pages/index/index",
     "pages/addressList/addressList",
     "pages/history/history",
-    "pages/search/search"
+    "pages/backAmount/backAmount",
+    "pages/backAmountDetail/backAmountDetail",
+    "pages/comment/comment",
+    "pages/hotHouse/hotHouse",
+    "pages/houseReserve/houseReserve",
+    "pages/afterSale/afterSale",
+    "pages/collections/collections"
   ],
   "window": {
     "backgroundTextStyle": "dark",

@@ -44,10 +44,10 @@
             <view class="item-title">商品金额</view>
             <view class="arrow">共{{orderInfo.num}}件商品，合计<text class="main-color">{{orderInfo.price_all}}</text>元</view>
         </view>
-        <view class="item">
+        <!-- <view class="item">
             <view class="item-title">积分抵扣（可用积分{{orderInfo.jf?orderInfo.jf:0}}，可抵扣{{orderInfo.jf_ded}}元）(无法使用积分)</view>
             <view class="arrow"><switch color="#f32f52" disabled="{{true}}" bindchange="switchChange"/></view>
-        </view>
+        </view> -->
         <view class="item">
             <view class="item-title item-inout">
                 <input bindinput="bindRemarkInput" maxlength="50" placeholder="订单备注：选填，给卖家留言（限50个字）" />
@@ -59,7 +59,7 @@
             
         </view>
         <view class="summary">
-            <view class="amount">合计：<text class="main-color">{{orderParams.is_jf?(orderInfo.price_all-orderInfo.jf_ded):orderInfo.price_all}}</text></view>
+            <view class="amount">合计：<text class="main-color">￥ {{orderParams.is_jf?(orderInfo.price_all-orderInfo.jf_ded):orderInfo.price_all}}</text></view>
             <view class="btn-buy" bindtap="submitOrder">提交订单</view>
         </view>
     </view>

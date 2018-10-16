@@ -1,0 +1,40 @@
+<!--pages/houseReserve/houseReserve.wxml-->
+<view class='page'>
+    <view class="weui-cells weui-cells_after-title t-16">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">房  源</view>
+            </view>
+            <view class="weui-cell__bd">
+                <view class="weui-input text-overflow">{{title}}</view>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label"><text class="main-color">*</text>预定人</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" type='text' value="{{}}" bindblur='bindName' placeholder="请输入预定人真实姓名" />
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label"><text class="main-color">*</text>手机号</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" type='number' bindinput='bindPhone' placeholder="请输入预定人手机号码" />
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">备  注</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" type='text' value="{{}}" bindblur='bindRemark' placeholder="请输入备注信息" />
+            </view>
+        </view>
+    </view>
+    <view class="btns">
+        <button class="login-btn full-button" bindtap="submit">提 交</button>
+    </view>
+</view>

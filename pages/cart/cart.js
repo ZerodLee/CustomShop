@@ -15,6 +15,8 @@ Page({
     cartList:[],
     count:0,
     cartInfo:{allPrice:'0.00',shopids:[]},
+
+    isEdit:false,
   },
 
   /**
@@ -30,8 +32,13 @@ Page({
     http.tokenPostRequest(url.getCart,{uid:app.globalData.user.id,limit:100,page:1,tmpid:url.tmpid},app.globalData.user.token).then(res =>{
       console.log('getCart',res)
       if(res.data.returnCode == '200'){
+        let cartList = res.data.data2.list.map((v,idx) =>{
+          v.index = idx
+          v.isEdit = false
+          return v
+        })
         that.setData({
-          cartList:res.data.data2.list,
+          cartList:cartList,
           count:res.data.data2.count
         })
         wx.setStorageSync('cart',{changed:false})
@@ -92,12 +99,20 @@ Page({
     }
     let that = this
     util.showLoading()
-    http.postRequest(url.comfirmBuy,{uid:app.globalData.user.id,shopids:that.data.cartInfo.shopids}).then(res =>{
+    let orderParam = {uid:app.globalData.user.id}
+    // for(let key in that.data.cartInfo.shopids){
+      
+    // }
+    that.data.cartInfo.shopids.forEach((v,idx) =>{
+      orderParam['shopids['+ idx +']'] = v
+    })
+    
+    http.postRequest(url.comfirmBuy,orderParam).then(res =>{
       console.log('comfirmBuy',res)
       if(res.data.returnCode == '200'){
         // util.toast(res.data.msg,'none')
         wx.navigateTo({
-          url: '../checkout/checkout?params=' + JSON.stringify(res.data.data2)
+          url: '../checkout/checkout?params=' + JSON.stringify(res.data.data2)+"&lijigoumai=0"
         })
       }else{
         throw res.data.msg
@@ -108,7 +123,87 @@ Page({
       util.hideLoading()
     })
   },
+  editCart(e){
+    let item = e.currentTarget.dataset.item
+    item.isEdit = !item.isEdit
+    this.setData({
+      ['cartList['+ item.index +']']:item
+    })
 
+    // var that=this
+    // var currentText=e.currentTarget.dataset.text
+    // console.log(currentText)
+    // console.log(e)
+    // var thisItem=e.currentTarget.dataset.item
+    // if(currentText=="编辑"){
+    //   thisItem.isEdit=true
+    // }
+    // else if(currentText=="完成"){
+    //   thisItem.isEdit=false
+    // }
+    // that.refresh_cartList(thisItem)
+  },
+  deleteItem(e){
+    let that = this
+    let item = e.currentTarget.dataset.item
+    util.openConfirm('提示','是否从购物车删除该商品？',function(){
+      util.showLoading()
+      http.tokenPostRequest(url.deleteCartItem,{id:item.id,uid:app.globalData.user.id,tmpid:url.tmpid},app.globalData.user.token).then(res =>{
+        console.log('deleteCartItem',res)
+        if(res.data.returnCode == '200'){
+          let cartList = that.data.cartList.filter(v => v.id != item.id)
+          cartList.map((v,idx) => {
+            v.index = idx
+            return v
+          })
+          that.setData({
+            cartList:cartList,
+          })
+          util.toast(res.data.msg)
+        }
+      }).catch(res =>{
+        util.openAlert(res)
+      }).finally(() => {
+        util.hideLoading()
+      })
+    })
+  },
+  editNumber(e){
+    let that = this
+    let item = e.currentTarget.dataset.item
+    if(item.num == 1 && !e.currentTarget.dataset.add){
+      util.toast('商品数量最小为1','none')
+      return false
+    }
+    e.currentTarget.dataset.add?item.num++:item.num--
+
+    util.showLoading()
+    http.tokenPostRequest(url.editCartNumber,{id:item.id,num:item.num,uid:app.globalData.user.id,tmpid:url.tmpid},app.globalData.user.token).then(res =>{
+      console.log('editCartNumber',res)
+      if(res.data.returnCode == '200'){
+        that.setData({
+          ['cartList['+ item.index +']']:item,
+        })
+      }
+    }).catch(res =>{
+      util.openAlert(res)
+    }).finally(() => {
+      util.hideLoading()
+    })
+  },
+  refresh_cartList(cartItem){
+    var that=this
+    for(var i=0;i<that.data.cartList.length;i++){
+      var item=that.data.cartList[i]
+      if(item.id==cartItem.id){
+          that.data.cartList[i]=cartItem;
+          that.setData({
+            ["cartList["+i+"]"]:cartItem
+          })
+          break
+      }
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

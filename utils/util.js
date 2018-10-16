@@ -195,6 +195,16 @@ function verifyLogin(){
             return false
       }
 }
+function isHasValue(temp){
+      if(temp && temp!=null && temp!=undefined){
+            temp=temp.toString().trim()
+            if(temp==""){
+                  return false
+            }
+            return true
+      }
+      return false      
+}
 module.exports = {
-  formatTime,toast,openAlert,openConfirm,showLoading,hideLoading,verifyLogin,isPhoneAvailable
+  formatTime,toast,openAlert,openConfirm,showLoading,hideLoading,verifyLogin,isPhoneAvailable,isHasValue
 }

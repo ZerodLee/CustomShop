@@ -1,4 +1,11 @@
 // pages/search/search.js
+import { Http } from '../../utils/http'
+import { url } from '../../utils/static/urls'
+
+const util = require('../../utils/util.js')
+
+//const app = getApp()
+const http = new Http()
 Page({
 
   /**
@@ -12,7 +19,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+      let that = this
+      util.showLoading()
+      http.getRequest(url.getHotSearch).then(res => {
+          console.log(res)
+          if (res.data.returnCode == '200') {
+              that.setData({
+                  hotwords: res.data.data2
+              })
+          }
+      }).catch(res => {
+          util.openAlert(res)
+      }).finally(() => {
+          util.hideLoading()
+      })
+      
   },
   showInput: function () {
     this.setData({
@@ -34,6 +55,12 @@ Page({
       this.setData({
           inputVal: e.detail.value
       });
+  },
+  searchWord(e){
+      let keyword = e.currentTarget.dataset.word?e.currentTarget.dataset.word:this.data.inputVal
+      wx.navigateTo({
+        url: '../homeCategories/homeCategories?keyword=' + keyword + '&title=搜索结果'
+      })
   },
 
   /**

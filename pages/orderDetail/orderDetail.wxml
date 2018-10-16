@@ -1,0 +1,84 @@
+<!--pages/orderDetail/orderDetail.wxml-->
+<view class="page">
+    <view class="order-state">
+        <view class="iconfont {{order.status < 5?'icon-zhuyishixiang_f':'icon-guanbi'}}"></view>
+        <view class="">{{orderTips[order.status]}}</view>
+    </view>
+    <view class="address">
+        <view class="has-address">
+            <view class="consignee">
+                <view class="name">联系人：{{order.receiver}}</view>
+                <view class="telephone">{{order.receipt_tel}}</view>
+            </view>
+            <view class="address-detail setting-list">
+                <view class="item">
+                    <view class="item-title text-overflow"><text class="iconfont icon-dizhi"></text>{{order.receipt_addr}}</view>
+                    <view class="arrow"><view class="iconfont icon-you"></view></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="order-info mt-2">
+        <view >订单编号：{{order.title}}</view>
+        <view >{{order.time}}</view>
+    </view>
+    <view class="cart-list mt-2">
+        <view class="pro-item" wx:for="{{order.pros}}" wx:key >
+            <view class="pro-img shrink-0"><image class="full-w full-h" src="{{item.photo}}" mode="widthFix" /></view>
+            <view class="pro-info">
+                <view class="pro-title text-overflow-2">{{item.title}}</view>
+                <view class="pro-prop text-overflow">{{item.attr1_title + ' ' + item.attr2_title}}</view>
+                <view class="amount">
+                    <view class="price main-color">￥{{item.price}}</view>
+                    <view class="number btns">
+                        <view >x{{item.pro_num}}</view>
+                        <view class="btn-outline button-effect" wx:if="{{order.status == 2 && !item.returnid}}" data-item="{{item}}" bindtap="getBackAmount">
+                         退款
+                        </view>
+                        <view class="btn-outline button-effect red" wx:if="{{order.status == 2 && item.returnid}}" data-item="{{item}}" bindtap="backAmountDetail">
+                         退款中
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="order-items setting-list mt-2">
+        <view class="item">
+            <view class="item-title secondary-color">邮费</view>
+            <view class="arrow"><view class="main-color">￥{{order.pro_freight}}</view></view>
+        </view>
+        <view class="item">
+            <view class="item-title secondary-color">商品金额</view>
+            <view class="arrow">共{{order.pros.length}}件商品，合计<text class="main-color">{{order.pro_amount}}</text>元</view>
+        </view>
+        <view class="item">
+            <view class="item-title">实付金额</view>
+            <view class="arrow"><text class="main-color">{{order.pay_amount}}</text>元</view>
+        </view>
+        <!-- <view class="item">
+            <view class="item-title">积分抵扣（可用积分{{orderInfo.jf?orderInfo.jf:0}}，可抵扣{{orderInfo.jf_ded}}元）(无法使用积分)</view>
+            <view class="arrow"><switch color="#f32f52" disabled="{{true}}" bindchange="switchChange"/></view>
+        </view> -->
+        <!-- <view class="item">
+            <view class="item-title item-inout">
+                <input bindinput="bindRemarkInput" maxlength="50" placeholder="订单备注：选填，给卖家留言（限50个字）" />
+            </view>
+        </view> -->
+    </view>
+    <view class="checkout-bar">
+        <view class="full-w summary row" wx:if="{{order.status == 1}}">
+            <view class="col-6 btn">取消订单</view>
+            <view class="col-6 btn btn-buy">立即付款</view>
+        </view>
+        <view class="full-w summary row" wx:if="{{order.status == 2}}">
+            <view class="full-w btn btn-buy">提醒发货</view>
+        </view>
+        <view class="full-w summary row" wx:if="{{order.status == 3}}">
+            <view class="full-w btn btn-buy">确认收货</view>
+        </view>
+        <view class="full-w summary row" wx:if="{{order.status == 5 || order.status == 6 || order.status == 7}}">
+            <view class="full-w btn btn-buy">删除订单</view>
+        </view>
+    </view>
+</view>

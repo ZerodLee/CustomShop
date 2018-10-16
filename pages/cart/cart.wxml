@@ -4,11 +4,12 @@
         购物车暂无商品
     </view>
     <view class="cart-list" wx:else>
-        <view class="pro-box">
+        <view class="pro-box" wx:for="{{cartList}}" wx:key>
             <view class="edit-bar">
-                <view class="edit-item">编辑</view>
+                <view class="edit-item" data-item="{{item}}" wx:if="{{item.isEdit}}" bindtap="deleteItem">删除</view>
+                <view class="edit-item" data-text="{{item.isEdit?'完成':'编辑'}}" data-item="{{item}}" bindtap="editCart">{{item.isEdit?'完成':'编辑'}}</view>
             </view>
-            <view class="pro-item" wx:for="{{cartList}}" wx:key>
+            <view class="pro-item">
                 <checkbox-group class="shrink-0" data-item="{{item}}" bindchange="checkboxChange">
                 <label class="check-btn">
                     <checkbox hidden value="{{item.id}}" checked="{{item.checked}}"></checkbox>
@@ -18,11 +19,16 @@
                 <view class="pro-img shrink-0"><image class="full-w full-h" src="{{item.proInfo.photo.url}}" mode="widthFix" /></view>
                 <view class="pro-info">
                     <view class="pro-title text-overflow-2">{{item.proInfo.title}}</view>
-                    <view class="pro-prop text-overflow">{{item.attrid1_name}}</view>
+                    <view class="pro-prop text-overflow-2">{{item.attrid1_name}}</view>
                     <view class="amount">
                         <view class="price main-color">￥{{item.proInfo.price}}</view>
-                        <view class="number">
-                            <view >x{{item.num}}</view>
+                        <view class="number" data-item="{{item}}" wx:if="{{!item.isEdit}}">
+                            <view>x{{item.num}}</view>
+                        </view>
+                        <view class="edit-number" data-item="{{item}}" wx:if="{{item.isEdit}}">
+                            <view class="edit-btn button-effect" data-item="{{item}}" data-add="{{false}}" bindtap="editNumber">-</view>
+                            <view class="edit-num">{{item.num}}</view>
+                            <view class="edit-btn button-effect" data-item="{{item}}" data-add="{{true}}" bindtap="editNumber">+</view>
                         </view>
                     </view>
                 </view>

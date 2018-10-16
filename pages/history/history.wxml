@@ -1,29 +1,17 @@
 <!--pages/history/history.wxml-->
 <view class="cart-list mt-2">
-    <view class="pro-item">
-        <view class="pro-img shrink-0"><image class="full-w full-h" src="/asset/img/pro.png" mode="widthFix" /></view>
+    <view class="pro-item" wx:for="{{listData}}" wx:key data-id="{{item.pid}}" bindtap="goDetail">
+        <view class="pro-img shrink-0"><image class="full-w full-h" src="{{item.thumb}}" mode="widthFix" /></view>
         <view class="pro-info">
-            <view class="pro-title text-overflow-2">商品名字的名字名字商品名字的名字名字商品名字的名字名字商品名字的名字名字</view>
-            <view class="pro-prop text-overflow">鞋子 ✍🏻 1.55kg brown</view>
+            <view class="pro-title text-overflow-2">{{item.title}}</view>
+            <view class="pro-prop text-overflow">销量：{{item.sales}}</view>
             <view class="amount">
-                <view class="price main-color">￥125.00</view>
+                <view class="price main-color">￥{{item.price}}</view>
                 <view class="number">
                     
                 </view>
             </view>
         </view>
     </view>
-    <view class="pro-item">
-        <view class="pro-img shrink-0"><image class="full-w full-h" src="/asset/img/pro.png" mode="widthFix" /></view>
-        <view class="pro-info">
-            <view class="pro-title text-overflow-2">商品名字的名字名字商品名字的名字名字商品名字的名字名字商品名字的名字名字</view>
-            <view class="pro-prop text-overflow">鞋子 ✍🏻 1.55kg brown</view>
-            <view class="amount">
-                <view class="price main-color">￥125.00</view>
-                <view class="number">
-                    
-                </view>
-            </view>
-        </view>
-    </view>
+    <view class="pro-item secondary-color" wx:if="{{count > 10 && count > listData.length}}"><view class="full-w text-center">加载更多数据...</view></view>
 </view>

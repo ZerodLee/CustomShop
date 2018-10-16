@@ -97,6 +97,20 @@ class Http {
         })
     }
 
+    uploadFileComment(url,filePath,formData,token){
+        var uploadRequest = this.wxPromisify(wx.uploadFile)
+        return uploadRequest({
+            url: url,
+            filePath: filePath,
+            name: 'upload_file',
+            formData: formData,
+            header: {
+                "token":token,
+                "contentType":"multipart/form-data"
+            },
+        })
+    }
+
     wxLogin() {
         let wxLogin = this.wxPromisify(wx.login)
         return wxLogin()

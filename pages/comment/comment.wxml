@@ -1,0 +1,53 @@
+<!--pages/comment/comment.wxml-->
+<view class="page">
+    <view class="mb-1" wx:for="{{proList}}" wx:key>
+        <view class="cart-list">
+            <view class="pro-item">
+                <view class="pro-img shrink-0"><image class="full-w full-h" src="{{item.photo}}" mode="widthFix" /></view>
+                <view class="pro-info">
+                    <view class="pro-title text-overflow-2">{{item.title}}</view>
+                    <view class="pro-prop text-overflow">{{item.attr1_title + ' ' + item.attr2_title}}</view>
+                    <view class="amount">
+                        <view class="price main-color">￥{{item.price}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell">
+                    <view class="weui-cell__bd">
+                        <textarea class="weui-textarea" bindinput="write_comment" data-pid="{{item.id}}" placeholder="如果满意，请给好评" style="height: 3.3em" />
+                        <view class="weui-textarea-counter secondary-color">{{item.comment.length}}/200</view>
+                    </view>
+                </view>
+            </view>
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <view class="weui-uploader">
+
+                        <view class="weui-uploader__bd">
+                            <view class="weui-uploader__files" id="uploaderFiles">
+                                <block wx:for="{{item.pics}}" wx:for-item="photo" wx:key="{{index}}">
+                                    <view class="weui-uploader__file" bindtap='previewImage' bindlongpress="deleteImage" data-pid="{{item.id}}" data-picid="{{photo.picId}}" data-url="{{photo.picUrl}}" data-index="{{index}}" >
+                                    <image class="weui-uploader__img" src="{{photo.picUrl}}" mode="aspectFill" />
+                                    </view>
+                                </block>
+                            </view>
+                            
+                            <view class="weui-uploader__input-box">
+                                <view class="weui-uploader__input" data-pid="{{item.id}}" bindtap="chooseImage"></view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="secondary-color p-1">Tips:长按图片可删除</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="checkout-bar">
+        <view class="full-w summary row">
+            <view class="full-w btn btn-buy" bindtap="submit_back_amount">确认提交</view>
+        </view>
+    </view>
+</view>

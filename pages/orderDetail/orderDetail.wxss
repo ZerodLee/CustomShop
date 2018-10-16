@@ -1,0 +1,141 @@
+/* pages/orderDetail/orderDetail.wxss */
+/* pages/checkout/checkout.wxss */
+.page{
+    padding-bottom: 45px;
+    box-sizing: border-box;
+}
+.address{
+    background-color: #fff;
+}
+.address .consignee{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    padding: 0 15px;
+    border-bottom: 1px solid #eee;
+}
+.address .icon-dizhi{
+    font-size: 20px;
+    margin-right: 10px;
+}
+.add-address{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #bbb;
+}
+
+.cart-list .pro-item{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #fcfcfc;
+}
+.pro-item .shrink-0{
+    flex-shrink: 0;
+}
+.pro-item .pro-info{
+    flex-grow: 1;
+    height: 22vw;
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+}
+.pro-item .check-btn{
+    padding: 0 4vw;
+}
+.pro-item .check-icon{
+    margin: 0;
+}
+.pro-item .pro-img{
+    width: 22vw;
+    height: 22vw;
+}
+.pro-info .pro-prop{
+    font-size: 12px;
+    color: #bbb;
+    margin-top: 5px;
+}
+.pro-info .amount{
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.setting-list.order-items .item:active{
+    background-color: inherit;
+  }
+.item-inout{
+    flex-grow: 1;
+}
+
+.checkout-bar{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+}
+.all-check{
+    padding: 0 5vw;
+}
+.all-check .middle-text{
+    vertical-align: middle;
+}
+.check-icon{
+    border: 1px solid #ddd;
+    border-radius: 19px;
+    width: 19px;
+    height: 19px;
+    display: inline-block;
+    margin-right: 2vw;
+}
+.summary{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    border-top: 1px solid #eee;
+}
+.summary .btn{
+    padding: 3.2vw 9vw;
+    font-size: 14px;
+}
+.summary .btn-buy{
+    background-color: #f32f52;
+    color: #fff;
+}
+
+.order-state{
+    padding: 20px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    color: #333;
+
+}
+.order-state .icon-zhuyishixiang_f{
+    font-size: 24px;
+    color: #e6cf4e;
+    margin-right: 10px;
+}
+.btns{
+    display: flex;
+    align-items: center;
+}
+.order-info{
+    background-color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: #666;
+}

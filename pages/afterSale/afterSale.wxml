@@ -1,0 +1,39 @@
+<!--pages/afterSale/afterSale.wxml-->
+<view class="page">
+    <view class="order-list" wx:if="{{returnOrder.list.length != 0}}">
+        <view class="order-item" wx:for="{{returnOrder.list}}" wx:key wx:for-item="order" data-item="{{order}}" bindtap="goDetail">
+            <view class="order-state p-2">
+                <view class="time secondary-color">订单编号：{{order.title}}</view>
+                <!-- <view class="iconfont icon-shijian secondary-color"></view> -->
+                <view class="time secondary-color">{{order.time}}</view>
+                <!-- <view class="main-color ml-auto">{{order.state}}</view> -->
+            </view>
+            <view class="cart-list">
+                <view class="pro-item">
+                    <view class="pro-img shrink-0"><image class="full-w full-h" src="{{order.proinfo.photo.url}}" mode="widthFix" /></view>
+                    <view class="pro-info">
+                        <view class="pro-title text-overflow-2">{{order.proinfo.title}}</view>
+                        <view class="pro-prop text-overflow">{{order.proinfo.attr1_title + ' ' + order.proinfo.attr2_title}}</view>
+                        <view class="amount">
+                            <view class="price main-color">￥{{order.proinfo.price}}</view>
+                            <view class="number">
+                                <view >x{{order.proinfo.pro_num}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="order-info">
+                <view class="main-color" wx:if="{{order.is_cancel == 1}}">已撤销</view>
+                <view class="main-color" wx:else>{{order.orderzt > 5?'退款成功':returnState[order.orderzt]}}</view>
+                <view class="">退款金额: ￥{{order.mrefund}}</view>
+            </view>
+        </view>
+        <!-- <view class="load-more button-effect p-2 text-center" wx:if="{{!catrgoryOrder.isOver && catrgoryOrder.count > 10}}" data-index="{{idx}}" bindtap="loadMore">加载更多</view> -->
+    </view>
+    <view class="order-empty" wx:else>
+        <view class="empty-img"><image class="full-w" src="/asset/img/order-empty.png" mode="widthFix" /></view>
+        <view class="mt-2 t-16">暂无订单，快去下单吧</view>
+    </view>
+</view>
+

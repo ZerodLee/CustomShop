@@ -17,7 +17,7 @@
                 </view>
             </view>
             <view class="personal-other">
-                <view class="other-info">收藏：{{user.colnuumber}}</view>
+                <view class="other-info" bindtap="goCollections">收藏：{{user.colnuumber}}</view>
                 <view class="other-info">积分：{{user.integral}}</view>
             </view>
         </view>
@@ -45,7 +45,7 @@
             <view class="iconfont icon-daipingjia"></view>
             <view class="type-name">待评价</view>
         </view>
-        <view class="order-type button-effect" bindtap="goOrderList" data-state="afterSale">
+        <view class="order-type button-effect" bindtap="goAfterSale" data-state="afterSale">
             <view class="iconfont icon-shouhou"></view>
             <view class="type-name">售后</view>
         </view>
@@ -59,11 +59,11 @@
             <view class="item-title">地址管理</view>
             <view class="arrow"><view class="iconfont icon-you"></view></view>
         </view>
-        <view class="item">
+        <view class="item" data-type="26" bindtap="goAboutUrl">
             <view class="item-title">帮助中心</view>
             <view class="arrow"><view class="iconfont icon-you"></view></view>
         </view>
-        <view class="item">
+        <view class="item" data-type="25" bindtap="goAboutUrl">
             <view class="item-title">关于巨惠好花红</view>
             <view class="arrow"><view class="iconfont icon-you"></view></view>
         </view>

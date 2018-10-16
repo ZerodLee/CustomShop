@@ -77,6 +77,32 @@ Page({
       util.openAlert(res)
     })
   },
+  goAboutUrl(e){
+    let type = e.currentTarget.dataset.type
+    http.postRequest(url.getAboutUrl,{type:type}).then(res =>{
+      console.log('getAboutUrl',res)
+      if(res.data.returnCode == '200'){
+        wx.navigateTo({
+          url: '../webview/webview?url=' + res.data.data2
+        })
+        
+      }else{
+        throw res.data.msg
+      }
+    }).catch(res =>{
+      util.openAlert(res)
+    })
+  },
+  goAfterSale(e){
+    wx.navigateTo({
+      url: '../afterSale/afterSale'
+    })
+  },
+  goCollections(e){
+    wx.navigateTo({
+      url: '../collections/collections'
+    })
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
